@@ -1,0 +1,15 @@
+事件时间线（相对负载开始）：
+  T+  30.0s  kill vllm-tp2-a
+  T+ 121.5s  start vllm-tp2-a
+  T+ 343.6s  backend healthy
+  T+ 447.3s  router routes to vllm-tp2-a again
+  T+ 600.9s  load done
+
+阶段统计（按请求开始时间归属）：
+  [稳态] 起 464 请求，成功 464，失败 0，p50 1.04s p99 1.83s
+  [kill vllm-tp2-a] 起 1177 请求，成功 1177，失败 0，p50 1.21s p99 1.97s
+  [start vllm-tp2-a] 起 2850 请求，成功 2850，失败 0，p50 1.21s p99 1.90s
+  [backend healthy] 起 1350 请求，成功 1350，失败 0，p50 1.20s p99 2.15s
+  [router routes to vllm-tp2-a again] 起 2113 请求，成功 2113，失败 0，p50 1.03s p99 1.73s
+
+总计 7954 请求，失败 0

@@ -1,0 +1,64 @@
+sudo docker exec llmbench-client vllm bench serve --backend vllm --endpoint /v1/completions --base-url http://127.0.0.1:8000 --model Qwen3.8-27B-FP8 --tokenizer /models/Qwen/Qwen3.8-27B-FP8 --percentile-metrics ttft,tpot,itl,e2el --metric-percentiles 50,90,99 --dataset-name random --ignore-eos --random-range-ratio 0.1 --random-input-len 16384 --random-output-len 1024 --max-concurrency 8 --num-prompts 24 --save-result --result-dir ~/llmbench/results/gpu-host/20260930-baseline__power-of-two/raw --result-filename summ.json
+
+INFO 09-29 16:15:54 [importing.py:53] Triton is installed but 0 active driver(s) found (expected 1). Disabling Triton to prevent runtime errors.
+INFO 09-29 16:15:54 [importing.py:88] Triton not installed or not compatible; certain GPU-related functions will not be available.
+W0929 16:15:54.754000 24810 torch/utils/cpp_extension.py:140] No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'
+INFO 09-29 16:15:55 [main.py:69] Unspecified platform detected, switching to CPU Platform instead.
+WARNING 09-29 16:15:55 [cpu.py:441] Failed to import from vllm._C_AVX2: ModuleNotFoundError("No module named 'vllm._C_AVX2'")
+Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0x740ce69f1c60>, trust_remote_code=False, seed=0, num_prompts=24, dataset_name='random', no_stream=False, dataset_path=None, no_oversample=False, skip_chat_template=False, enable_multimodal_chat=False, disable_shuffle=False, custom_output_len=256, custom_ensure_client_side_data=False, spec_bench_output_len=256, spec_bench_category=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=None, timed_trace_chunk_hash_size=16, timed_trace_sec_multiplier=1, timed_trace_label_timestamp='timestamp', timed_trace_label_input_length='input_length', timed_trace_label_output_length='output_length', timed_trace_label_hash_ids='hash_ids', blazedit_min_distance=0.0, blazedit_max_distance=1.0, asr_max_audio_len_sec=inf, asr_min_audio_len_sec=0.0, random_input_len=16384, random_output_len=1024, random_range_ratio='0.1', random_prefix_len=0, random_batch_size=1, no_reranker=False, random_mm_base_items_per_request=1, random_mm_num_mm_items_range_ratio=0.0, random_mm_limit_mm_per_prompt={'image': 255, 'video': 1}, random_mm_bucket_config={(256, 256, 1): 0.5, (720, 1280, 1): 0.5, (720, 1280, 16): 0.0}, hf_subset=None, hf_split=None, hf_name=None, hf_output_len=None, bfcl_categories=None, prefix_repetition_prefix_len=256, prefix_repetition_suffix_len=256, prefix_repetition_num_prefixes=10, prefix_repetition_output_len=128, speed_bench_dataset_subset='qualitative', speed_bench_output_len=4096, speed_bench_category=None, label=None, backend='vllm', base_url='http://127.0.0.1:8000', host='127.0.0.1', port=8000, endpoint='/v1/completions', header=None, max_concurrency=8, model='Qwen3.8-27B-FP8', input_len=None, output_len=None, tokenizer='/models/Qwen/Qwen3.8-27B-FP8', tokenizer_mode='auto', use_beam_search=False, logprobs=None, request_rate=inf, burstiness=1.0, disable_tqdm=False, num_warmups=0, profile=False, save_result=True, save_detailed=False, append_result=False, metadata=None, result_dir='~/llmbench/results/gpu-host/20260930-baseline__power-of-two/raw', result_filename='summ.json', ignore_eos=True, self_timed=None, percentile_metrics='ttft,tpot,itl,e2el', metric_percentiles='50,90,99', goodput=None, request_id_prefix='bench-417a6bb5-', top_p=None, top_k=None, min_p=None, temperature=None, frequency_penalty=None, presence_penalty=None, repetition_penalty=None, served_model_name=None, lora_modules=None, lora_assignment='random', ramp_up_strategy=None, ramp_up_start_rps=None, ramp_up_end_rps=None, ready_check_timeout_sec=0, chat_template_kwargs=None, extra_body=None, skip_tokenizer_init=False, insecure=False, plot_timeline=False, timeline_itl_thresholds='25,50', plot_dataset_stats=False)
+INFO 09-29 16:15:57 [utils.py:90] Sampling input_len from [14745, 18023] and output_len from [921, 1127]
+WARNING: vllm bench serve no longer sets temperature==0 (greedy) in requests by default. The default will be determined on the server side and can be model/API specific. For the old behavior, include --temperature=0.
+Starting initial single prompt test run...
+Skipping endpoint ready check.
+Starting main benchmark run...
+Traffic request rate: inf
+Burstiness factor: 1.0 (Poisson process)
+Maximum request concurrency: 8
+  0%|          | 0/24 [00:00<?, ?it/s]  4%|▍         | 1/24 [00:35<13:33, 35.38s/it]  8%|▊         | 2/24 [00:42<06:49, 18.63s/it] 12%|█▎        | 3/24 [00:52<05:06, 14.61s/it] 17%|█▋        | 4/24 [00:56<03:27, 10.39s/it] 21%|██        | 5/24 [00:59<02:32,  8.05s/it] 25%|██▌       | 6/24 [01:07<02:22,  7.89s/it] 29%|██▉       | 7/24 [01:10<01:45,  6.19s/it] 33%|███▎      | 8/24 [01:20<01:59,  7.48s/it] 38%|███▊      | 9/24 [01:27<01:50,  7.38s/it] 46%|████▌     | 11/24 [01:35<01:14,  5.69s/it] 50%|█████     | 12/24 [01:42<01:13,  6.17s/it] 54%|█████▍    | 13/24 [01:49<01:09,  6.35s/it] 58%|█████▊    | 14/24 [01:55<01:01,  6.12s/it] 62%|██████▎   | 15/24 [02:01<00:55,  6.14s/it] 67%|██████▋   | 16/24 [02:12<01:00,  7.62s/it] 71%|███████   | 17/24 [02:16<00:44,  6.40s/it] 75%|███████▌  | 18/24 [02:19<00:32,  5.40s/it] 79%|███████▉  | 19/24 [02:22<00:23,  4.71s/it] 83%|████████▎ | 20/24 [02:24<00:16,  4.13s/it] 88%|████████▊ | 21/24 [02:26<00:09,  3.26s/it] 92%|█████████▏| 22/24 [02:26<00:04,  2.50s/it] 96%|█████████▌| 23/24 [02:31<00:03,  3.11s/it]100%|██████████| 24/24 [02:34<00:00,  3.23s/it]100%|██████████| 24/24 [02:34<00:00,  6.45s/it]
+tip: install termplotlib and gnuplot to plot the metrics
+============ Serving Benchmark Result ============
+Successful requests:                     24        
+Failed requests:                         0         
+Maximum request concurrency:             8         
+Benchmark duration (s):                  154.82    
+Total input tokens:                      394883    
+Total generated tokens:                  24072     
+Request throughput (req/s):              0.16      
+Output token throughput (tok/s):         155.48    
+Peak output token throughput (tok/s):    173.00    
+Peak concurrent requests:                10.00     
+Total token throughput (tok/s):          2706.02   
+---------------Time to First Token----------------
+Mean TTFT (ms):                          10687.04  
+Median TTFT (ms):                        7261.55   
+P50 TTFT (ms):                           7261.55   
+P90 TTFT (ms):                           18968.54  
+P99 TTFT (ms):                           29905.76  
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          37.51     
+Median TPOT (ms):                        33.12     
+P50 TPOT (ms):                           33.12     
+P90 TPOT (ms):                           57.93     
+P99 TPOT (ms):                           85.41     
+---------------Inter-token Latency----------------
+Mean ITL (ms):                           90.60     
+Median ITL (ms):                         46.96     
+P50 ITL (ms):                            46.96     
+P90 ITL (ms):                            54.54     
+P99 ITL (ms):                            662.86    
+----------------End-to-end Latency----------------
+Mean E2EL (ms):                          48372.94  
+Median E2EL (ms):                        47704.02  
+P50 E2EL (ms):                           47704.02  
+P90 E2EL (ms):                           68439.23  
+P99 E2EL (ms):                           93442.14  
+---------------Speculative Decoding---------------
+Acceptance rate (%):                     74.58     
+Acceptance length:                       2.49      
+Drafts:                                  4337      
+Draft tokens:                            8674      
+Accepted tokens:                         6469      
+Per-position acceptance (%):
+  Position 0:                            76.37     
+  Position 1:                            72.79     
+==================================================

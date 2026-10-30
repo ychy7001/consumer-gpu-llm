@@ -1,0 +1,63 @@
+sudo docker exec llmbench-client vllm bench serve --backend vllm --endpoint /v1/completions --base-url http://127.0.0.1:8000 --model Qwen3.8-27B-FP8 --tokenizer /models/Qwen/Qwen3.8-27B-FP8 --percentile-metrics ttft,tpot,itl,e2el --metric-percentiles 50,90,99 --dataset-name random --ignore-eos --random-range-ratio 0.1 --random-input-len 512 --random-output-len 256 --max-concurrency 16 --num-prompts 96 --save-result --result-dir ~/llmbench/results/gpu-host/20260929-mtp__seq64-pc-mtp1/raw --result-filename chat.json
+
+INFO 09-29 13:03:35 [importing.py:53] Triton is installed but 0 active driver(s) found (expected 1). Disabling Triton to prevent runtime errors.
+INFO 09-29 13:03:35 [importing.py:88] Triton not installed or not compatible; certain GPU-related functions will not be available.
+W0929 13:03:36.172000 8041 torch/utils/cpp_extension.py:140] No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'
+INFO 09-29 13:03:37 [main.py:69] Unspecified platform detected, switching to CPU Platform instead.
+WARNING 09-29 13:03:37 [cpu.py:441] Failed to import from vllm._C_AVX2: ModuleNotFoundError("No module named 'vllm._C_AVX2'")
+Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0x7e95177a9760>, trust_remote_code=False, seed=0, num_prompts=96, dataset_name='random', no_stream=False, dataset_path=None, no_oversample=False, skip_chat_template=False, enable_multimodal_chat=False, disable_shuffle=False, custom_output_len=256, custom_ensure_client_side_data=False, spec_bench_output_len=256, spec_bench_category=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=None, timed_trace_chunk_hash_size=16, timed_trace_sec_multiplier=1, timed_trace_label_timestamp='timestamp', timed_trace_label_input_length='input_length', timed_trace_label_output_length='output_length', timed_trace_label_hash_ids='hash_ids', blazedit_min_distance=0.0, blazedit_max_distance=1.0, asr_max_audio_len_sec=inf, asr_min_audio_len_sec=0.0, random_input_len=512, random_output_len=256, random_range_ratio='0.1', random_prefix_len=0, random_batch_size=1, no_reranker=False, random_mm_base_items_per_request=1, random_mm_num_mm_items_range_ratio=0.0, random_mm_limit_mm_per_prompt={'image': 255, 'video': 1}, random_mm_bucket_config={(256, 256, 1): 0.5, (720, 1280, 1): 0.5, (720, 1280, 16): 0.0}, hf_subset=None, hf_split=None, hf_name=None, hf_output_len=None, bfcl_categories=None, prefix_repetition_prefix_len=256, prefix_repetition_suffix_len=256, prefix_repetition_num_prefixes=10, prefix_repetition_output_len=128, speed_bench_dataset_subset='qualitative', speed_bench_output_len=4096, speed_bench_category=None, label=None, backend='vllm', base_url='http://127.0.0.1:8000', host='127.0.0.1', port=8000, endpoint='/v1/completions', header=None, max_concurrency=16, model='Qwen3.8-27B-FP8', input_len=None, output_len=None, tokenizer='/models/Qwen/Qwen3.8-27B-FP8', tokenizer_mode='auto', use_beam_search=False, logprobs=None, request_rate=inf, burstiness=1.0, disable_tqdm=False, num_warmups=0, profile=False, save_result=True, save_detailed=False, append_result=False, metadata=None, result_dir='~/llmbench/results/gpu-host/20260929-mtp__seq64-pc-mtp1/raw', result_filename='chat.json', ignore_eos=True, self_timed=None, percentile_metrics='ttft,tpot,itl,e2el', metric_percentiles='50,90,99', goodput=None, request_id_prefix='bench-ea8c2f1e-', top_p=None, top_k=None, min_p=None, temperature=None, frequency_penalty=None, presence_penalty=None, repetition_penalty=None, served_model_name=None, lora_modules=None, lora_assignment='random', ramp_up_strategy=None, ramp_up_start_rps=None, ramp_up_end_rps=None, ready_check_timeout_sec=0, chat_template_kwargs=None, extra_body=None, skip_tokenizer_init=False, insecure=False, plot_timeline=False, timeline_itl_thresholds='25,50', plot_dataset_stats=False)
+INFO 09-29 13:03:38 [utils.py:90] Sampling input_len from [460, 564] and output_len from [230, 282]
+WARNING: vllm bench serve no longer sets temperature==0 (greedy) in requests by default. The default will be determined on the server side and can be model/API specific. For the old behavior, include --temperature=0.
+Starting initial single prompt test run...
+Skipping endpoint ready check.
+Starting main benchmark run...
+Traffic request rate: inf
+Burstiness factor: 1.0 (Poisson process)
+Maximum request concurrency: 16
+  0%|          | 0/96 [00:00<?, ?it/s]  1%|          | 1/96 [00:06<11:04,  6.99s/it]  3%|▎         | 3/96 [00:07<02:55,  1.89s/it]  4%|▍         | 4/96 [00:07<02:11,  1.43s/it]  6%|▋         | 6/96 [00:08<01:12,  1.24it/s]  7%|▋         | 7/96 [00:08<01:02,  1.42it/s]  8%|▊         | 8/96 [00:09<00:56,  1.55it/s] 10%|█         | 10/96 [00:09<00:33,  2.54it/s] 11%|█▏        | 11/96 [00:09<00:32,  2.59it/s] 12%|█▎        | 12/96 [00:10<00:35,  2.38it/s] 14%|█▎        | 13/96 [00:10<00:32,  2.59it/s] 16%|█▌        | 15/96 [00:11<00:30,  2.69it/s] 17%|█▋        | 16/96 [00:13<01:07,  1.19it/s] 18%|█▊        | 17/96 [00:14<01:10,  1.12it/s] 19%|█▉        | 18/96 [00:14<01:00,  1.28it/s] 20%|█▉        | 19/96 [00:15<00:56,  1.36it/s] 21%|██        | 20/96 [00:16<00:54,  1.39it/s] 22%|██▏       | 21/96 [00:16<00:53,  1.40it/s] 23%|██▎       | 22/96 [00:17<00:43,  1.68it/s] 25%|██▌       | 24/96 [00:17<00:25,  2.84it/s] 26%|██▌       | 25/96 [00:17<00:23,  2.96it/s] 28%|██▊       | 27/96 [00:17<00:15,  4.51it/s] 29%|██▉       | 28/96 [00:18<00:18,  3.76it/s] 30%|███       | 29/96 [00:18<00:18,  3.59it/s] 31%|███▏      | 30/96 [00:18<00:22,  2.91it/s] 32%|███▏      | 31/96 [00:20<00:49,  1.30it/s] 33%|███▎      | 32/96 [00:21<00:42,  1.50it/s] 34%|███▍      | 33/96 [00:21<00:39,  1.58it/s] 35%|███▌      | 34/96 [00:22<00:32,  1.88it/s] 36%|███▋      | 35/96 [00:23<00:46,  1.31it/s] 38%|███▊      | 36/96 [00:23<00:38,  1.57it/s] 39%|███▊      | 37/96 [00:25<00:50,  1.17it/s] 42%|████▏     | 40/96 [00:25<00:22,  2.50it/s] 43%|████▎     | 41/96 [00:25<00:23,  2.32it/s] 45%|████▍     | 43/96 [00:25<00:15,  3.39it/s] 46%|████▌     | 44/96 [00:26<00:13,  3.94it/s] 47%|████▋     | 45/96 [00:26<00:20,  2.49it/s] 48%|████▊     | 46/96 [00:28<00:38,  1.31it/s] 49%|████▉     | 47/96 [00:29<00:31,  1.56it/s] 50%|█████     | 48/96 [00:29<00:26,  1.79it/s] 51%|█████     | 49/96 [00:29<00:22,  2.07it/s] 52%|█████▏    | 50/96 [00:30<00:22,  2.05it/s] 53%|█████▎    | 51/96 [00:30<00:21,  2.09it/s] 54%|█████▍    | 52/96 [00:31<00:23,  1.83it/s] 55%|█████▌    | 53/96 [00:31<00:18,  2.28it/s] 56%|█████▋    | 54/96 [00:33<00:40,  1.04it/s] 57%|█████▋    | 55/96 [00:34<00:39,  1.04it/s] 58%|█████▊    | 56/96 [00:35<00:31,  1.27it/s] 60%|██████    | 58/96 [00:35<00:21,  1.80it/s] 62%|██████▎   | 60/96 [00:37<00:24,  1.47it/s] 64%|██████▎   | 61/96 [00:38<00:25,  1.37it/s] 66%|██████▌   | 63/96 [00:39<00:20,  1.61it/s] 67%|██████▋   | 64/96 [00:39<00:17,  1.86it/s] 68%|██████▊   | 65/96 [00:39<00:15,  2.05it/s] 70%|██████▉   | 67/96 [00:40<00:12,  2.39it/s] 71%|███████   | 68/96 [00:40<00:10,  2.55it/s] 72%|███████▏  | 69/96 [00:41<00:11,  2.32it/s] 73%|███████▎  | 70/96 [00:41<00:10,  2.40it/s] 75%|███████▌  | 72/96 [00:42<00:08,  2.90it/s] 76%|███████▌  | 73/96 [00:43<00:15,  1.46it/s] 78%|███████▊  | 75/96 [00:44<00:09,  2.11it/s] 79%|███████▉  | 76/96 [00:45<00:13,  1.43it/s] 80%|████████  | 77/96 [00:46<00:13,  1.38it/s] 82%|████████▏ | 79/96 [00:46<00:08,  1.99it/s] 84%|████████▍ | 81/96 [00:47<00:06,  2.35it/s] 85%|████████▌ | 82/96 [00:47<00:05,  2.56it/s] 86%|████████▋ | 83/96 [00:47<00:04,  2.87it/s] 88%|████████▊ | 84/96 [00:48<00:04,  2.75it/s] 89%|████████▊ | 85/96 [00:48<00:03,  3.26it/s] 91%|█████████ | 87/96 [00:48<00:01,  4.86it/s] 92%|█████████▏| 88/96 [00:50<00:04,  1.89it/s] 93%|█████████▎| 89/96 [00:50<00:03,  2.07it/s] 94%|█████████▍| 90/96 [00:50<00:02,  2.44it/s] 95%|█████████▍| 91/96 [00:52<00:03,  1.56it/s] 96%|█████████▌| 92/96 [00:52<00:02,  1.63it/s] 97%|█████████▋| 93/96 [00:52<00:01,  1.99it/s] 98%|█████████▊| 94/96 [00:53<00:01,  1.97it/s] 99%|█████████▉| 95/96 [00:53<00:00,  1.98it/s]100%|██████████| 96/96 [00:54<00:00,  2.46it/s]100%|██████████| 96/96 [00:54<00:00,  1.78it/s]
+tip: install termplotlib and gnuplot to plot the metrics
+============ Serving Benchmark Result ============
+Successful requests:                     96        
+Failed requests:                         0         
+Maximum request concurrency:             16        
+Benchmark duration (s):                  54.03     
+Total input tokens:                      49316     
+Total generated tokens:                  24810     
+Request throughput (req/s):              1.78      
+Output token throughput (tok/s):         459.17    
+Peak output token throughput (tok/s):    376.00    
+Peak concurrent requests:                23.00     
+Total token throughput (tok/s):          1371.89   
+---------------Time to First Token----------------
+Mean TTFT (ms):                          489.76    
+Median TTFT (ms):                        315.79    
+P50 TTFT (ms):                           315.79    
+P90 TTFT (ms):                           1024.73   
+P99 TTFT (ms):                           1791.28   
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          30.89     
+Median TPOT (ms):                        30.23     
+P50 TPOT (ms):                           30.23     
+P90 TPOT (ms):                           38.54     
+P99 TPOT (ms):                           51.82     
+---------------Inter-token Latency----------------
+Mean ITL (ms):                           51.42     
+Median ITL (ms):                         44.17     
+P50 ITL (ms):                            44.17     
+P90 ITL (ms):                            48.10     
+P99 ITL (ms):                            227.04    
+----------------End-to-end Latency----------------
+Mean E2EL (ms):                          8414.47   
+Median E2EL (ms):                        8215.42   
+P50 E2EL (ms):                           8215.42   
+P90 E2EL (ms):                           10300.12  
+P99 E2EL (ms):                           13801.83  
+---------------Speculative Decoding---------------
+Acceptance rate (%):                     58.45     
+Acceptance length:                       1.58      
+Drafts:                                  7617      
+Draft tokens:                            7617      
+Accepted tokens:                         4452      
+Per-position acceptance (%):
+  Position 0:                            58.45     
+==================================================

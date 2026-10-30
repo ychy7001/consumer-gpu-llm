@@ -1,0 +1,6 @@
+ts,event
+1790729964.088,kill vllm-tp2-a
+1790730055.599,start vllm-tp2-a
+1790730277.720,backend healthy
+1790730381.444,router routes to vllm-tp2-a again
+1790730535.037,load done

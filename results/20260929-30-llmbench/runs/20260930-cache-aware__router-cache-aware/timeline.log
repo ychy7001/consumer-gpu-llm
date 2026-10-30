@@ -1,0 +1,27 @@
+[2026-09-30 08:27:37] setup
+[2026-09-30 08:27:42] start sweep-c1
+[2026-09-30 08:29:13] end sweep-c1 ok
+[2026-09-30 08:29:23] start sweep-c4
+[2026-09-30 08:30:08] end sweep-c4 ok
+[2026-09-30 08:30:18] start sweep-c8
+[2026-09-30 08:31:05] end sweep-c8 ok
+[2026-09-30 08:31:15] start sweep-c16
+[2026-09-30 08:32:13] end sweep-c16 ok
+[2026-09-30 08:32:23] start sweep-c32
+[2026-09-30 08:33:38] end sweep-c32 ok
+[2026-09-30 08:33:48] start sweep-c64
+[2026-09-30 08:35:41] end sweep-c64 ok
+[2026-09-30 08:35:51] start chat
+[2026-09-30 08:37:00] end chat ok
+[2026-09-30 08:37:10] start rag
+[2026-09-30 08:39:16] end rag ok
+[2026-09-30 08:39:26] start summ
+[2026-09-30 08:42:12] end summ ok
+[2026-09-30 08:42:22] start longout
+[2026-09-30 08:44:40] end longout ok
+[2026-09-30 08:44:50] start prefix-c16
+[2026-09-30 08:46:49] end prefix-c16 ok
+[2026-09-30 08:46:59] start real-c16
+[2026-09-30 08:48:58] end real-c16 ok
+[2026-09-30 08:49:08] start real-c1
+[2026-09-30 08:50:18] end real-c1 ok

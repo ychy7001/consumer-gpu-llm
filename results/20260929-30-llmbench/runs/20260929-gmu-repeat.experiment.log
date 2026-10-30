@@ -1,0 +1,13 @@
+[2026-09-29 21:56:49] === seq64-pc-mtp2-gmu078-r2: ~/loadtest/tool/scripts/deploy_llm.sh '--max-num-seqs 64 --enable-prefix-caching --speculative-config {"method":"mtp","num_speculative_tokens":2} --gpu-memory-utilization 0.78'
+
+$ ~/loadtest/tool/scripts/deploy_llm.sh '--max-num-seqs 64 --enable-prefix-caching --speculative-config {"method":"mtp","num_speculative_tokens":2} --gpu-memory-utilization 0.78'
+[21:56:49] deploy: --max-num-seqs 64 --enable-prefix-caching --speculative-config {"method":"mtp","num_speculative_tokens":2} --gpu-memory-utilization 0.78
+[22:00:58] backends ready after 250s
+[22:02:42] router ready
+[2026-09-29 22:25:30] rollback（实验结束）
+
+$ ~/loadtest/tool/scripts/deploy_llm.sh '--max-num-seqs 64 --enable-prefix-caching --speculative-config {"method":"mtp","num_speculative_tokens":2}'
+[22:25:30] deploy: --max-num-seqs 64 --enable-prefix-caching --speculative-config {"method":"mtp","num_speculative_tokens":2}
+[22:29:39] backends ready after 250s
+[22:31:44] router ready
+[2026-09-29 22:31:44] experiment done: {'seq64-pc-mtp2-gmu078-r2': 'completed'}

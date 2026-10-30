@@ -1,0 +1,27 @@
+[09:12:10] 目标 vllm-tp2-a:8003，缓存 ~/loadtest/vllm-cache/torch_compile_cache
+[09:14:30] [hot1] docker start → /health 200：138s
+    torch.compile took 9.28 s in total
+    Initial profiling/warmup run took 1.70 s
+    torch.compile took 1.13 s in total
+    Initial profiling/warmup run took 0.08 s
+    Graph capturing finished in 10 secs, took 0.93 GiB
+    init engine (profile, create kv cache, warmup model) took 29.62 s (compilation: 11.19 s)
+[09:14:30] [hot1] 缓存大小：6.6G
+[09:14:30] 原缓存已移至 ~/loadtest/vllm-cache/torch_compile_cache.bak-20260930091210
+[09:19:49] [cold] docker start → /health 200：317s
+    torch.compile took 91.64 s in total
+    Initial profiling/warmup run took 72.65 s
+    torch.compile took 14.09 s in total
+    Initial profiling/warmup run took 0.60 s
+    Graph capturing finished in 12 secs, took 0.93 GiB
+    init engine (profile, create kv cache, warmup model) took 213.02 s (compilation: 106.46 s)
+[09:19:49] [cold] 缓存大小：1002M
+[09:19:51] 缓存已恢复
+[09:22:07] [hot2] docker start → /health 200：136s
+    torch.compile took 9.42 s in total
+    Initial profiling/warmup run took 1.22 s
+    torch.compile took 1.18 s in total
+    Initial profiling/warmup run took 0.06 s
+    Graph capturing finished in 10 secs, took 0.93 GiB
+    init engine (profile, create kv cache, warmup model) took 29.29 s (compilation: 10.86 s)
+[09:22:07] [hot2] 缓存大小：6.6G

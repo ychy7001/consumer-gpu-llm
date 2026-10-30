@@ -1,0 +1,649 @@
+{
+  "schema_version": 1,
+  "run_id": "20260929-gmu-repeat__seq64-pc-mtp2-gmu078-r2",
+  "site": "gpu-host",
+  "suite": "quick",
+  "labels": {
+    "hardware": "4x48G-pcie",
+    "experiment": "20260929-gmu-repeat",
+    "variant": "seq64-pc-mtp2-gmu078-r2",
+    "deploy_args": "--max-num-seqs 64 --enable-prefix-caching --speculative-config {\"method\":\"mtp\",\"num_speculative_tokens\":2} --gpu-memory-utilization 0.78",
+    "router": "0.1.15",
+    "repeat_of": "seq64-pc-mtp2-gmu078"
+  },
+  "status": "completed",
+  "started_ts": 1790690562.9064615,
+  "target": {
+    "site": "gpu-host",
+    "results_root": "~/llmbench/results",
+    "exec": {
+      "prefix": [
+        "sudo",
+        "docker",
+        "exec",
+        "llmbench-client"
+      ],
+      "bench_cmd": [
+        "vllm",
+        "bench",
+        "serve"
+      ],
+      "setup": "mkdir -p ~/llmbench/results && if ! sudo docker ps --format '{{.Names}}' | grep -qx llmbench-client; then sudo docker rm -f llmbench-client >/dev/null 2>&1 || true; sudo docker run -d --name llmbench-client --network host -v /models:/models:ro -v ~/llmbench/results:~/llmbench/results --entrypoint sleep vllm/vllm-openai:v0.25.1 infinity >/dev/null && sudo docker exec llmbench-client pip install -q pandas; fi"
+    },
+    "services": {
+      "llm": {
+        "base_url": "http://127.0.0.1:8000",
+        "model": "Qwen3.8-27B-FP8",
+        "tokenizer": "/models/Qwen/Qwen3.8-27B-FP8"
+      },
+      "embedding": {
+        "base_url": "http://127.0.0.1:8001",
+        "model": "Qwen3-Embedding-0.6B",
+        "tokenizer": "/models/Qwen/Qwen3-Embedding-0.6B"
+      },
+      "rerank": {
+        "base_url": "http://127.0.0.1:8002",
+        "model": "Qwen3-Reranker-0.6B",
+        "tokenizer": "/models/Qwen/Qwen3-Reranker-0.6B"
+      }
+    },
+    "metrics": {
+      "llm-a": "http://127.0.0.1:8003/metrics",
+      "llm-b": "http://127.0.0.1:8004/metrics",
+      "router": "http://127.0.0.1:29000/metrics"
+    },
+    "sampling": {
+      "interval_s": 15
+    },
+    "fingerprint": {
+      "containers": "sudo docker ps --format '{{.Names}}|{{.Image}}|{{.Command}}' --no-trunc",
+      "llm-a": "sudo docker inspect -f '{{json .Config.Cmd}}' vllm-tp2-a",
+      "llm-b": "sudo docker inspect -f '{{json .Config.Cmd}}' vllm-tp2-b",
+      "router": "systemctl cat vllm-router"
+    },
+    "labels": {
+      "hardware": "4x48G-pcie"
+    }
+  },
+  "scenario_specs": {
+    "sweep-c1": {
+      "name": "sweep-c1",
+      "service": "llm",
+      "api": "completions",
+      "dataset": {
+        "kind": "random",
+        "input_len": 1024,
+        "output_len": 256,
+        "range_ratio": 0.1,
+        "prefix_len": null,
+        "path": null,
+        "ignore_eos": true
+      },
+      "num_prompts": 16,
+      "concurrency": 1,
+      "request_rate": null,
+      "group": "throughput",
+      "temperature": null,
+      "slo": {
+        "p99_ttft_ms": 2000.0,
+        "p99_tpot_ms": 80.0
+      },
+      "extra_args": [],
+      "timeout_s": null,
+      "description": "吞吐-并发扫描，in1k/out256"
+    },
+    "sweep-c4": {
+      "name": "sweep-c4",
+      "service": "llm",
+      "api": "completions",
+      "dataset": {
+        "kind": "random",
+        "input_len": 1024,
+        "output_len": 256,
+        "range_ratio": 0.1,
+        "prefix_len": null,
+        "path": null,
+        "ignore_eos": true
+      },
+      "num_prompts": 16,
+      "concurrency": 4,
+      "request_rate": null,
+      "group": "throughput",
+      "temperature": null,
+      "slo": {
+        "p99_ttft_ms": 2000.0,
+        "p99_tpot_ms": 80.0
+      },
+      "extra_args": [],
+      "timeout_s": null,
+      "description": "吞吐-并发扫描，in1k/out256"
+    },
+    "sweep-c8": {
+      "name": "sweep-c8",
+      "service": "llm",
+      "api": "completions",
+      "dataset": {
+        "kind": "random",
+        "input_len": 1024,
+        "output_len": 256,
+        "range_ratio": 0.1,
+        "prefix_len": null,
+        "path": null,
+        "ignore_eos": true
+      },
+      "num_prompts": 32,
+      "concurrency": 8,
+      "request_rate": null,
+      "group": "throughput",
+      "temperature": null,
+      "slo": {
+        "p99_ttft_ms": 2000.0,
+        "p99_tpot_ms": 80.0
+      },
+      "extra_args": [],
+      "timeout_s": null,
+      "description": "吞吐-并发扫描，in1k/out256"
+    },
+    "sweep-c16": {
+      "name": "sweep-c16",
+      "service": "llm",
+      "api": "completions",
+      "dataset": {
+        "kind": "random",
+        "input_len": 1024,
+        "output_len": 256,
+        "range_ratio": 0.1,
+        "prefix_len": null,
+        "path": null,
+        "ignore_eos": true
+      },
+      "num_prompts": 64,
+      "concurrency": 16,
+      "request_rate": null,
+      "group": "throughput",
+      "temperature": null,
+      "slo": {
+        "p99_ttft_ms": 2000.0,
+        "p99_tpot_ms": 80.0
+      },
+      "extra_args": [],
+      "timeout_s": null,
+      "description": "吞吐-并发扫描，in1k/out256"
+    },
+    "sweep-c32": {
+      "name": "sweep-c32",
+      "service": "llm",
+      "api": "completions",
+      "dataset": {
+        "kind": "random",
+        "input_len": 1024,
+        "output_len": 256,
+        "range_ratio": 0.1,
+        "prefix_len": null,
+        "path": null,
+        "ignore_eos": true
+      },
+      "num_prompts": 128,
+      "concurrency": 32,
+      "request_rate": null,
+      "group": "throughput",
+      "temperature": null,
+      "slo": {
+        "p99_ttft_ms": 2000.0,
+        "p99_tpot_ms": 80.0
+      },
+      "extra_args": [],
+      "timeout_s": null,
+      "description": "吞吐-并发扫描，in1k/out256"
+    },
+    "sweep-c64": {
+      "name": "sweep-c64",
+      "service": "llm",
+      "api": "completions",
+      "dataset": {
+        "kind": "random",
+        "input_len": 1024,
+        "output_len": 256,
+        "range_ratio": 0.1,
+        "prefix_len": null,
+        "path": null,
+        "ignore_eos": true
+      },
+      "num_prompts": 256,
+      "concurrency": 64,
+      "request_rate": null,
+      "group": "throughput",
+      "temperature": null,
+      "slo": {
+        "p99_ttft_ms": 2000.0,
+        "p99_tpot_ms": 80.0
+      },
+      "extra_args": [],
+      "timeout_s": null,
+      "description": "吞吐-并发扫描，in1k/out256"
+    },
+    "chat": {
+      "name": "chat",
+      "service": "llm",
+      "api": "completions",
+      "dataset": {
+        "kind": "random",
+        "input_len": 512,
+        "output_len": 256,
+        "range_ratio": 0.1,
+        "prefix_len": null,
+        "path": null,
+        "ignore_eos": true
+      },
+      "num_prompts": 96,
+      "concurrency": 16,
+      "request_rate": null,
+      "group": "shape",
+      "temperature": null,
+      "slo": {
+        "p99_ttft_ms": 2000.0,
+        "p99_tpot_ms": 80.0
+      },
+      "extra_args": [],
+      "timeout_s": null,
+      "description": "短对话 in512/out256"
+    },
+    "rag": {
+      "name": "rag",
+      "service": "llm",
+      "api": "completions",
+      "dataset": {
+        "kind": "random",
+        "input_len": 4096,
+        "output_len": 512,
+        "range_ratio": 0.1,
+        "prefix_len": null,
+        "path": null,
+        "ignore_eos": true
+      },
+      "num_prompts": 64,
+      "concurrency": 16,
+      "request_rate": null,
+      "group": "shape",
+      "temperature": null,
+      "slo": {
+        "p99_ttft_ms": 2000.0,
+        "p99_tpot_ms": 80.0
+      },
+      "extra_args": [],
+      "timeout_s": null,
+      "description": "RAG 问答 in4k/out512"
+    },
+    "summ": {
+      "name": "summ",
+      "service": "llm",
+      "api": "completions",
+      "dataset": {
+        "kind": "random",
+        "input_len": 16384,
+        "output_len": 1024,
+        "range_ratio": 0.1,
+        "prefix_len": null,
+        "path": null,
+        "ignore_eos": true
+      },
+      "num_prompts": 24,
+      "concurrency": 8,
+      "request_rate": null,
+      "group": "shape",
+      "temperature": null,
+      "slo": {
+        "p99_tpot_ms": 80.0
+      },
+      "extra_args": [],
+      "timeout_s": null,
+      "description": "长文摘要 in16k/out1k"
+    },
+    "longout": {
+      "name": "longout",
+      "service": "llm",
+      "api": "completions",
+      "dataset": {
+        "kind": "random",
+        "input_len": 1024,
+        "output_len": 2048,
+        "range_ratio": 0.1,
+        "prefix_len": null,
+        "path": null,
+        "ignore_eos": true
+      },
+      "num_prompts": 32,
+      "concurrency": 16,
+      "request_rate": null,
+      "group": "shape",
+      "temperature": null,
+      "slo": {
+        "p99_tpot_ms": 80.0
+      },
+      "extra_args": [],
+      "timeout_s": null,
+      "description": "长输出 in1k/out2k"
+    },
+    "prefix-c16": {
+      "name": "prefix-c16",
+      "service": "llm",
+      "api": "completions",
+      "dataset": {
+        "kind": "random",
+        "input_len": 512,
+        "output_len": 256,
+        "range_ratio": 0.1,
+        "prefix_len": 4096,
+        "path": null,
+        "ignore_eos": true
+      },
+      "num_prompts": 96,
+      "concurrency": 16,
+      "request_rate": null,
+      "group": "cache",
+      "temperature": null,
+      "slo": {
+        "p99_ttft_ms": 2000.0,
+        "p99_tpot_ms": 80.0
+      },
+      "extra_args": [],
+      "timeout_s": null,
+      "description": "共享 4k 前缀（同一 system prompt / RAG 文档），评估 prefix caching"
+    },
+    "real-c16": {
+      "name": "real-c16",
+      "service": "llm",
+      "api": "chat",
+      "dataset": {
+        "kind": "custom",
+        "input_len": null,
+        "output_len": 1024,
+        "range_ratio": 0.1,
+        "prefix_len": null,
+        "path": "real_prompts.jsonl",
+        "ignore_eos": true
+      },
+      "num_prompts": 64,
+      "concurrency": 16,
+      "request_rate": null,
+      "group": "content",
+      "temperature": 0.7,
+      "slo": {},
+      "extra_args": [],
+      "timeout_s": null,
+      "description": "真实文本 + chat 模板（含 thinking），评估 MTP 等内容相关优化"
+    },
+    "real-c1": {
+      "name": "real-c1",
+      "service": "llm",
+      "api": "chat",
+      "dataset": {
+        "kind": "custom",
+        "input_len": null,
+        "output_len": 512,
+        "range_ratio": 0.1,
+        "prefix_len": null,
+        "path": "real_prompts.jsonl",
+        "ignore_eos": true
+      },
+      "num_prompts": 6,
+      "concurrency": 1,
+      "request_rate": null,
+      "group": "content",
+      "temperature": 0.7,
+      "slo": {},
+      "extra_args": [],
+      "timeout_s": null,
+      "description": "真实文本单流"
+    }
+  },
+  "scenarios": {
+    "sweep-c1": {
+      "status": "ok",
+      "rc": 0,
+      "error": "",
+      "started_ts": 1790690567.9196084,
+      "ended_ts": 1790690661.8999748
+    },
+    "sweep-c4": {
+      "status": "ok",
+      "rc": 0,
+      "error": "",
+      "started_ts": 1790690671.9035704,
+      "ended_ts": 1790690732.4052384
+    },
+    "sweep-c8": {
+      "status": "ok",
+      "rc": 0,
+      "error": "",
+      "started_ts": 1790690742.4089217,
+      "ended_ts": 1790690795.2272623
+    },
+    "sweep-c16": {
+      "status": "ok",
+      "rc": 0,
+      "error": "",
+      "started_ts": 1790690805.231089,
+      "ended_ts": 1790690862.4470577
+    },
+    "sweep-c32": {
+      "status": "ok",
+      "rc": 0,
+      "error": "",
+      "started_ts": 1790690872.450947,
+      "ended_ts": 1790690950.4782658
+    },
+    "sweep-c64": {
+      "status": "ok",
+      "rc": 0,
+      "error": "",
+      "started_ts": 1790690960.4821038,
+      "ended_ts": 1790691074.378592
+    },
+    "chat": {
+      "status": "ok",
+      "rc": 0,
+      "error": "",
+      "started_ts": 1790691084.3822067,
+      "ended_ts": 1790691153.9993222
+    },
+    "rag": {
+      "status": "ok",
+      "rc": 0,
+      "error": "",
+      "started_ts": 1790691164.003136,
+      "ended_ts": 1790691292.169228
+    },
+    "summ": {
+      "status": "ok",
+      "rc": 0,
+      "error": "",
+      "started_ts": 1790691302.173069,
+      "ended_ts": 1790691483.8854558
+    },
+    "longout": {
+      "status": "ok",
+      "rc": 0,
+      "error": "",
+      "started_ts": 1790691493.8893209,
+      "ended_ts": 1790691614.8319275
+    },
+    "prefix-c16": {
+      "status": "ok",
+      "rc": 0,
+      "error": "",
+      "started_ts": 1790691624.8357546,
+      "ended_ts": 1790691717.5460615
+    },
+    "real-c16": {
+      "status": "ok",
+      "rc": 0,
+      "error": "",
+      "started_ts": 1790691727.5506237,
+      "ended_ts": 1790691846.934402
+    },
+    "real-c1": {
+      "status": "ok",
+      "rc": 0,
+      "error": "",
+      "started_ts": 1790691856.9395278,
+      "ended_ts": 1790691930.8592615
+    }
+  },
+  "fingerprint": {
+    "host": {
+      "hostname": "gpu-host",
+      "platform": "Linux-6.17.0-14-generic-x86_64-with-glibc2.39"
+    },
+    "gpu": {
+      "rc": 0,
+      "stdout": "0, NVIDIA GeForce RTX 4090, 49140 MiB, 595.84\n1, NVIDIA GeForce RTX 4090, 49140 MiB, 595.84\n2, NVIDIA GeForce RTX 4090, 49140 MiB, 595.84\n3, NVIDIA GeForce RTX 4090, 49140 MiB, 595.84",
+      "stderr": ""
+    },
+    "services": {
+      "llm": {
+        "base_url": "http://127.0.0.1:8000",
+        "model": "Qwen3.8-27B-FP8",
+        "models": {
+          "object": "list",
+          "data": [
+            {
+              "id": "Qwen3.8-27B-FP8",
+              "object": "model",
+              "created": 1790690562,
+              "owned_by": "vllm",
+              "root": "/models/Qwen/Qwen3.8-27B-FP8",
+              "parent": null,
+              "max_model_len": 262144,
+              "permission": [
+                {
+                  "id": "modelperm-94180d3e2d225e4a",
+                  "object": "model_permission",
+                  "created": 1790690562,
+                  "allow_create_engine": false,
+                  "allow_sampling": true,
+                  "allow_logprobs": true,
+                  "allow_search_indices": false,
+                  "allow_view": true,
+                  "allow_fine_tuning": false,
+                  "organization": "*",
+                  "group": null,
+                  "is_blocking": false
+                }
+              ]
+            }
+          ]
+        },
+        "version": {
+          "version": "0.25.1"
+        }
+      },
+      "embedding": {
+        "base_url": "http://127.0.0.1:8001",
+        "model": "Qwen3-Embedding-0.6B",
+        "models": {
+          "object": "list",
+          "data": [
+            {
+              "id": "Qwen3-Embedding-0.6B",
+              "object": "model",
+              "created": 1790690562,
+              "owned_by": "vllm",
+              "root": "/models/Qwen/Qwen3-Embedding-0.6B",
+              "parent": null,
+              "max_model_len": 8192,
+              "permission": [
+                {
+                  "id": "modelperm-a146f6e61741167c",
+                  "object": "model_permission",
+                  "created": 1790690562,
+                  "allow_create_engine": false,
+                  "allow_sampling": true,
+                  "allow_logprobs": true,
+                  "allow_search_indices": false,
+                  "allow_view": true,
+                  "allow_fine_tuning": false,
+                  "organization": "*",
+                  "group": null,
+                  "is_blocking": false
+                }
+              ]
+            }
+          ]
+        },
+        "version": {
+          "version": "0.25.1"
+        }
+      },
+      "rerank": {
+        "base_url": "http://127.0.0.1:8002",
+        "model": "Qwen3-Reranker-0.6B",
+        "models": {
+          "object": "list",
+          "data": [
+            {
+              "id": "Qwen3-Reranker-0.6B",
+              "object": "model",
+              "created": 1790690562,
+              "owned_by": "vllm",
+              "root": "/models/Qwen/Qwen3-Reranker-0.6B",
+              "parent": null,
+              "max_model_len": 8192,
+              "permission": [
+                {
+                  "id": "modelperm-93b4c7f8ee21f7e9",
+                  "object": "model_permission",
+                  "created": 1790690562,
+                  "allow_create_engine": false,
+                  "allow_sampling": true,
+                  "allow_logprobs": true,
+                  "allow_search_indices": false,
+                  "allow_view": true,
+                  "allow_fine_tuning": false,
+                  "organization": "*",
+                  "group": null,
+                  "is_blocking": false
+                }
+              ]
+            }
+          ]
+        },
+        "version": {
+          "version": "0.25.1"
+        }
+      }
+    },
+    "commands": {
+      "containers": {
+        "rc": 0,
+        "stdout": "vllm-tp2-b|vllm/vllm-openai:v0.25.1|\"vllm serve /models/Qwen/Qwen3.8-27B-FP8 --host 0.0.0.0 --port 8000 --gpu-memory-utilization 0.82 --max-model-len 262144 --tensor-parallel-size 2 --kv-cache-dtype fp8 --reasoning-parser qwen3 --enable-auto-tool-choice --tool-call-parser qwen3_coder --served-model-name Qwen3.8-27B-FP8 --max-num-seqs 64 --enable-prefix-caching --speculative-config {\\\"method\\\":\\\"mtp\\\",\\\"num_speculative_tokens\\\":2} --gpu-memory-utilization 0.78\"\nvllm-tp2-a|vllm/vllm-openai:v0.25.1|\"vllm serve /models/Qwen/Qwen3.8-27B-FP8 --host 0.0.0.0 --port 8000 --gpu-memory-utilization 0.82 --max-model-len 262144 --tensor-parallel-size 2 --kv-cache-dtype fp8 --reasoning-parser qwen3 --enable-auto-tool-choice --tool-call-parser qwen3_coder --served-model-name Qwen3.8-27B-FP8 --max-num-seqs 64 --enable-prefix-caching --speculative-config {\\\"method\\\":\\\"mtp\\\",\\\"num_speculative_tokens\\\":2} --gpu-memory-utilization 0.78\"\nvllm-reranker|vllm/vllm-openai:v0.25.1|\"vllm serve /models/Qwen/Qwen3-Reranker-0.6B --host 0.0.0.0 --port 8000 --runner pooling --convert classify --gpu-memory-utilization 0.08 --max-model-len 8192 --served-model-name Qwen3-Reranker-0.6B --hf-overrides {\\\"architectures\\\":[\\\"Qwen3ForSequenceClassification\\\"],\\\"classifier_from_token\\\":[\\\"no\\\",\\\"yes\\\"],\\\"is_original_qwen3_reranker\\\":true}\"\nvllm-embedding|vllm/vllm-openai:v0.25.1|\"vllm serve /models/Qwen/Qwen3-Embedding-0.6B --host 0.0.0.0 --port 8000 --runner pooling --convert embed --gpu-memory-utilization 0.10 --max-model-len 8192 --served-model-name Qwen3-Embedding-0.6B\"",
+        "stderr": ""
+      },
+      "llm-a": {
+        "rc": 0,
+        "stdout": "[\"/models/Qwen/Qwen3.8-27B-FP8\",\"--host\",\"0.0.0.0\",\"--port\",\"8000\",\"--gpu-memory-utilization\",\"0.82\",\"--max-model-len\",\"262144\",\"--tensor-parallel-size\",\"2\",\"--kv-cache-dtype\",\"fp8\",\"--reasoning-parser\",\"qwen3\",\"--enable-auto-tool-choice\",\"--tool-call-parser\",\"qwen3_coder\",\"--served-model-name\",\"Qwen3.8-27B-FP8\",\"--max-num-seqs\",\"64\",\"--enable-prefix-caching\",\"--speculative-config\",\"{\\\"method\\\":\\\"mtp\\\",\\\"num_speculative_tokens\\\":2}\",\"--gpu-memory-utilization\",\"0.78\"]",
+        "stderr": ""
+      },
+      "llm-b": {
+        "rc": 0,
+        "stdout": "[\"/models/Qwen/Qwen3.8-27B-FP8\",\"--host\",\"0.0.0.0\",\"--port\",\"8000\",\"--gpu-memory-utilization\",\"0.82\",\"--max-model-len\",\"262144\",\"--tensor-parallel-size\",\"2\",\"--kv-cache-dtype\",\"fp8\",\"--reasoning-parser\",\"qwen3\",\"--enable-auto-tool-choice\",\"--tool-call-parser\",\"qwen3_coder\",\"--served-model-name\",\"Qwen3.8-27B-FP8\",\"--max-num-seqs\",\"64\",\"--enable-prefix-caching\",\"--speculative-config\",\"{\\\"method\\\":\\\"mtp\\\",\\\"num_speculative_tokens\\\":2}\",\"--gpu-memory-utilization\",\"0.78\"]",
+        "stderr": ""
+      },
+      "router": {
+        "rc": 0,
+        "stdout": "# /etc/systemd/system/vllm-router.service\n[Unit]\nDescription=vLLM Router\nAfter=network-online.target docker.service\nWants=network-online.target\n[Service]\nUser=ychy\nExecStart=~/vllm-router-venv/bin/vllm-router --host 0.0.0.0 --port 8000 --worker-urls http://127.0.0.1:8003 http://127.0.0.1:8004 --policy power_of_two\nRestart=always\nRestartSec=5\n[Install]\nWantedBy=multi-user.target\n\n# /etc/systemd/system/vllm-router.service.d/override.conf\n[Service]\nExecStart=\nExecStart=~/vllm-router-venv-0.1.15/bin/vllm-router --host 0.0.0.0 --port 8000 --worker-urls http://127.0.0.1:8003 http://127.0.0.1:8004 --policy power_of_two --max-payload-size 67108864",
+        "stderr": ""
+      }
+    },
+    "tool": {
+      "llmbench": "0.1.0",
+      "git_sha": null,
+      "bench": {
+        "rc": 0,
+        "stdout": "0.25.1",
+        "stderr": ""
+      }
+    }
+  },
+  "ended_ts": 1790691930.8627884
+}

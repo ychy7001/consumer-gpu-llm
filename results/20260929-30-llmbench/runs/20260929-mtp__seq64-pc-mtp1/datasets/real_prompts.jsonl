@@ -1,0 +1,120 @@
+{"prompt": "Explain KV cache for LLM serving to a junior engineer, step by step, with a small code sample."}
+{"prompt": "用 Python 实现一个Raft 选主，并给出单元测试。"}
+{"prompt": "对比RAG pipeline的三种常见实现方案，给出选型建议，用表格总结。"}
+{"prompt": "请详细解释灰度发布的原理，并举一个工程中的例子。"}
+{"prompt": "用 Python 实现一个gRPC streaming，并给出单元测试。"}
+{"prompt": "把下面这个需求拆解成开发任务：实现KV cache for LLM serving，给出每个任务的工作量估计。"}
+{"prompt": "为一致性哈希写一份上线前检查清单，并说明每一项的原因。"}
+{"prompt": "用 Python 实现一个RAG pipeline，并给出单元测试。"}
+{"prompt": "请详细解释gRPC streaming的原理，并举一个工程中的例子。"}
+{"prompt": "Write a concise technical design doc for 熔断器, including trade-offs."}
+{"prompt": "Write a concise technical design doc for bloom filter, including trade-offs."}
+{"prompt": "为RAG pipeline写一份上线前检查清单，并说明每一项的原因。"}
+{"prompt": "用 Python 实现一个rate limiter，并给出单元测试。"}
+{"prompt": "请详细解释Raft 选主的原理，并举一个工程中的例子。"}
+{"prompt": "Explain write-ahead log to a junior engineer, step by step, with a small code sample."}
+{"prompt": "对比向量检索的三种常见实现方案，给出选型建议，用表格总结。"}
+{"prompt": "Explain 令牌桶限流 to a junior engineer, step by step, with a small code sample."}
+{"prompt": "Summarize the key failure modes of 分布式锁 and how to monitor them."}
+{"prompt": "Write a concise technical design doc for RAG pipeline, including trade-offs."}
+{"prompt": "为数据库连接池写一份上线前检查清单，并说明每一项的原因。"}
+{"prompt": "把下面这个需求拆解成开发任务：实现一致性哈希，给出每个任务的工作量估计。"}
+{"prompt": "为灰度发布写一份上线前检查清单，并说明每一项的原因。"}
+{"prompt": "Explain 数据库连接池 to a junior engineer, step by step, with a small code sample."}
+{"prompt": "为Raft 选主写一份上线前检查清单，并说明每一项的原因。"}
+{"prompt": "用 Python 实现一个B+ 树索引，并给出单元测试。"}
+{"prompt": "把下面这个需求拆解成开发任务：实现熔断器，给出每个任务的工作量估计。"}
+{"prompt": "对比数据库连接池的三种常见实现方案，给出选型建议，用表格总结。"}
+{"prompt": "Summarize the key failure modes of Raft 选主 and how to monitor them."}
+{"prompt": "Write a concise technical design doc for JWT 鉴权, including trade-offs."}
+{"prompt": "用 Python 实现一个JWT 鉴权，并给出单元测试。"}
+{"prompt": "请详细解释向量检索的原理，并举一个工程中的例子。"}
+{"prompt": "请详细解释分布式锁的原理，并举一个工程中的例子。"}
+{"prompt": "对比HTTP/2 多路复用的三种常见实现方案，给出选型建议，用表格总结。"}
+{"prompt": "Summarize the key failure modes of JWT 鉴权 and how to monitor them."}
+{"prompt": "请详细解释LRU 缓存的原理，并举一个工程中的例子。"}
+{"prompt": "把下面这个需求拆解成开发任务：实现数据库连接池，给出每个任务的工作量估计。"}
+{"prompt": "请详细解释令牌桶限流的原理，并举一个工程中的例子。"}
+{"prompt": "为JWT 鉴权写一份上线前检查清单，并说明每一项的原因。"}
+{"prompt": "Explain gRPC streaming to a junior engineer, step by step, with a small code sample."}
+{"prompt": "Write a concise technical design doc for 向量检索, including trade-offs."}
+{"prompt": "Explain B+ 树索引 to a junior engineer, step by step, with a small code sample."}
+{"prompt": "Explain 分布式锁 to a junior engineer, step by step, with a small code sample."}
+{"prompt": "对比倒排索引的三种常见实现方案，给出选型建议，用表格总结。"}
+{"prompt": "把下面这个需求拆解成开发任务：实现向量检索，给出每个任务的工作量估计。"}
+{"prompt": "Explain 灰度发布 to a junior engineer, step by step, with a small code sample."}
+{"prompt": "Summarize the key failure modes of 数据库连接池 and how to monitor them."}
+{"prompt": "对比分布式锁的三种常见实现方案，给出选型建议，用表格总结。"}
+{"prompt": "用 Python 实现一个write-ahead log，并给出单元测试。"}
+{"prompt": "Summarize the key failure modes of 向量检索 and how to monitor them."}
+{"prompt": "Write a concise technical design doc for 消息队列的幂等消费, including trade-offs."}
+{"prompt": "Summarize the key failure modes of RAG pipeline and how to monitor them."}
+{"prompt": "Summarize the key failure modes of 消息队列的幂等消费 and how to monitor them."}
+{"prompt": "请详细解释RAG pipeline的原理，并举一个工程中的例子。"}
+{"prompt": "Write a concise technical design doc for gRPC streaming, including trade-offs."}
+{"prompt": "Write a concise technical design doc for 一致性哈希, including trade-offs."}
+{"prompt": "用 Python 实现一个消息队列的幂等消费，并给出单元测试。"}
+{"prompt": "Write a concise technical design doc for HTTP/2 多路复用, including trade-offs."}
+{"prompt": "用 Python 实现一个令牌桶限流，并给出单元测试。"}
+{"prompt": "用 Python 实现一个灰度发布，并给出单元测试。"}
+{"prompt": "对比rate limiter的三种常见实现方案，给出选型建议，用表格总结。"}
+{"prompt": "把下面这个需求拆解成开发任务：实现令牌桶限流，给出每个任务的工作量估计。"}
+{"prompt": "Write a concise technical design doc for 数据库连接池, including trade-offs."}
+{"prompt": "Write a concise technical design doc for B+ 树索引, including trade-offs."}
+{"prompt": "为熔断器写一份上线前检查清单，并说明每一项的原因。"}
+{"prompt": "为令牌桶限流写一份上线前检查清单，并说明每一项的原因。"}
+{"prompt": "对比LRU 缓存的三种常见实现方案，给出选型建议，用表格总结。"}
+{"prompt": "请详细解释HTTP/2 多路复用的原理，并举一个工程中的例子。"}
+{"prompt": "用 Python 实现一个一致性哈希，并给出单元测试。"}
+{"prompt": "Summarize the key failure modes of gRPC streaming and how to monitor them."}
+{"prompt": "为分布式锁写一份上线前检查清单，并说明每一项的原因。"}
+{"prompt": "请详细解释B+ 树索引的原理，并举一个工程中的例子。"}
+{"prompt": "Explain JWT 鉴权 to a junior engineer, step by step, with a small code sample."}
+{"prompt": "把下面这个需求拆解成开发任务：实现gRPC streaming，给出每个任务的工作量估计。"}
+{"prompt": "为gRPC streaming写一份上线前检查清单，并说明每一项的原因。"}
+{"prompt": "Write a concise technical design doc for 灰度发布, including trade-offs."}
+{"prompt": "Explain RAG pipeline to a junior engineer, step by step, with a small code sample."}
+{"prompt": "Write a concise technical design doc for rate limiter, including trade-offs."}
+{"prompt": "请详细解释rate limiter的原理，并举一个工程中的例子。"}
+{"prompt": "对比KV cache for LLM serving的三种常见实现方案，给出选型建议，用表格总结。"}
+{"prompt": "把下面这个需求拆解成开发任务：实现分布式锁，给出每个任务的工作量估计。"}
+{"prompt": "把下面这个需求拆解成开发任务：实现Raft 选主，给出每个任务的工作量估计。"}
+{"prompt": "请详细解释JWT 鉴权的原理，并举一个工程中的例子。"}
+{"prompt": "Explain rate limiter to a junior engineer, step by step, with a small code sample."}
+{"prompt": "为bloom filter写一份上线前检查清单，并说明每一项的原因。"}
+{"prompt": "Explain 向量检索 to a junior engineer, step by step, with a small code sample."}
+{"prompt": "用 Python 实现一个KV cache for LLM serving，并给出单元测试。"}
+{"prompt": "把下面这个需求拆解成开发任务：实现LRU 缓存，给出每个任务的工作量估计。"}
+{"prompt": "Summarize the key failure modes of B+ 树索引 and how to monitor them."}
+{"prompt": "请详细解释bloom filter的原理，并举一个工程中的例子。"}
+{"prompt": "用 Python 实现一个HTTP/2 多路复用，并给出单元测试。"}
+{"prompt": "对比令牌桶限流的三种常见实现方案，给出选型建议，用表格总结。"}
+{"prompt": "对比消息队列的幂等消费的三种常见实现方案，给出选型建议，用表格总结。"}
+{"prompt": "Write a concise technical design doc for LRU 缓存, including trade-offs."}
+{"prompt": "把下面这个需求拆解成开发任务：实现write-ahead log，给出每个任务的工作量估计。"}
+{"prompt": "Summarize the key failure modes of KV cache for LLM serving and how to monitor them."}
+{"prompt": "Write a concise technical design doc for write-ahead log, including trade-offs."}
+{"prompt": "对比灰度发布的三种常见实现方案，给出选型建议，用表格总结。"}
+{"prompt": "Summarize the key failure modes of write-ahead log and how to monitor them."}
+{"prompt": "请详细解释熔断器的原理，并举一个工程中的例子。"}
+{"prompt": "请详细解释数据库连接池的原理，并举一个工程中的例子。"}
+{"prompt": "把下面这个需求拆解成开发任务：实现消息队列的幂等消费，给出每个任务的工作量估计。"}
+{"prompt": "把下面这个需求拆解成开发任务：实现B+ 树索引，给出每个任务的工作量估计。"}
+{"prompt": "用 Python 实现一个数据库连接池，并给出单元测试。"}
+{"prompt": "为rate limiter写一份上线前检查清单，并说明每一项的原因。"}
+{"prompt": "Write a concise technical design doc for 分布式锁, including trade-offs."}
+{"prompt": "Explain HTTP/2 多路复用 to a junior engineer, step by step, with a small code sample."}
+{"prompt": "请详细解释倒排索引的原理，并举一个工程中的例子。"}
+{"prompt": "Write a concise technical design doc for 令牌桶限流, including trade-offs."}
+{"prompt": "为KV cache for LLM serving写一份上线前检查清单，并说明每一项的原因。"}
+{"prompt": "对比B+ 树索引的三种常见实现方案，给出选型建议，用表格总结。"}
+{"prompt": "对比bloom filter的三种常见实现方案，给出选型建议，用表格总结。"}
+{"prompt": "用 Python 实现一个LRU 缓存，并给出单元测试。"}
+{"prompt": "Summarize the key failure modes of 倒排索引 and how to monitor them."}
+{"prompt": "Explain 消息队列的幂等消费 to a junior engineer, step by step, with a small code sample."}
+{"prompt": "为LRU 缓存写一份上线前检查清单，并说明每一项的原因。"}
+{"prompt": "为消息队列的幂等消费写一份上线前检查清单，并说明每一项的原因。"}
+{"prompt": "Summarize the key failure modes of HTTP/2 多路复用 and how to monitor them."}
+{"prompt": "Write a concise technical design doc for 倒排索引, including trade-offs."}
+{"prompt": "把下面这个需求拆解成开发任务：实现bloom filter，给出每个任务的工作量估计。"}
+{"prompt": "Explain Raft 选主 to a junior engineer, step by step, with a small code sample."}

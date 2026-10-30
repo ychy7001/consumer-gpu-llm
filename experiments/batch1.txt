@@ -1,0 +1,5 @@
+e1-seq32|--max-num-seqs 32
+e1-seq64|--max-num-seqs 64
+e2-seq64-pc|--max-num-seqs 64 --enable-prefix-caching
+e3-seq64-mtp2|--max-num-seqs 64 --speculative-config {"method":"mtp","num_speculative_tokens":2}
+e4-seq64-pc-mbt8k|--max-num-seqs 64 --enable-prefix-caching --max-num-batched-tokens 8192

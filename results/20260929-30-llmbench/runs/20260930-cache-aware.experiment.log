@@ -1,0 +1,68 @@
+[2026-09-30 00:27:45] === router-cache-aware: sudo sed -i 's/--policy [a-z_]*/--policy {policy}/' /etc/systemd/system/vllm-router.service.d/override.conf
+sudo systemctl daemon-reload
+sudo systemctl restart vllm-router
+sleep 5
+for i in {1..60}; do
+  code=$(curl -s -o /dev/null -w '%{{http_code}}' http://127.0.0.1:8000/v1/models 2>/dev/null)
+  [[ $code == 200 ]] && { echo "Router ready with {policy}"; exit 0; }
+  sleep 2
+done
+echo "Router not ready"; exit 1
+
+
+$ sudo sed -i 's/--policy [a-z_]*/--policy {policy}/' /etc/systemd/system/vllm-router.service.d/override.conf
+sudo systemctl daemon-reload
+sudo systemctl restart vllm-router
+sleep 5
+for i in {1..60}; do
+  code=$(curl -s -o /dev/null -w '%{{http_code}}' http://127.0.0.1:8000/v1/models 2>/dev/null)
+  [[ $code == 200 ]] && { echo "Router ready with {policy}"; exit 0; }
+  sleep 2
+done
+echo "Router not ready"; exit 1
+
+Router not ready
+[2026-09-30 00:29:52] rollback（deploy 失败）
+
+$ sudo sed -i 's/--policy [a-z_]*/--policy power_of_two/' /etc/systemd/system/vllm-router.service.d/override.conf
+sudo systemctl daemon-reload
+sudo systemctl restart vllm-router
+sleep 5
+for i in {1..60}; do
+  code=$(curl -s -o /dev/null -w '%{{http_code}}' http://127.0.0.1:8000/v1/models 2>/dev/null)
+  [[ $code == 200 ]] && { echo "Router rolled back to power_of_two"; exit 0; }
+  sleep 2
+done
+echo "Router rollback failed"; exit 1
+
+Router rollback failed
+[2026-09-30 00:31:59] rollback 失败，需要人工介入
+[2026-09-30 00:31:59] rollback（实验结束）
+
+$ sudo sed -i 's/--policy [a-z_]*/--policy power_of_two/' /etc/systemd/system/vllm-router.service.d/override.conf
+sudo systemctl daemon-reload
+sudo systemctl restart vllm-router
+sleep 5
+for i in {1..60}; do
+  code=$(curl -s -o /dev/null -w '%{{http_code}}' http://127.0.0.1:8000/v1/models 2>/dev/null)
+  [[ $code == 200 ]] && { echo "Router rolled back to power_of_two"; exit 0; }
+  sleep 2
+done
+echo "Router rollback failed"; exit 1
+
+Router rollback failed
+[2026-09-30 00:34:05] rollback 失败，需要人工介入
+[2026-09-30 00:34:05] experiment done: {'router-cache-aware': 'deploy-failed'}
+[2026-09-30 08:27:34] === router-cache-aware: ~/llmbench/scripts/deploy_router_policy.sh cache_aware
+
+$ ~/llmbench/scripts/deploy_router_policy.sh cache_aware
+[08:27:34] policy -> cache_aware
+--policy cache_aware
+[08:27:37] Router ready
+[2026-09-30 08:50:18] rollback（实验结束）
+
+$ ~/llmbench/scripts/deploy_router_policy.sh power_of_two
+[08:50:18] policy -> power_of_two
+--policy power_of_two
+[08:50:21] Router ready
+[2026-09-30 08:50:21] experiment done: {'router-cache-aware': 'completed'}
