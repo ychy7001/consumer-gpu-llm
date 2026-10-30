@@ -21,13 +21,20 @@ if [[ $(sudo docker inspect -f '{{.State.Running}}' "$HELD" 2>/dev/null) == true
   echo "$HELD is running on the target GPUs, refuse to deploy"; exit 3
 fi
 sudo docker rm -f "$NAME" >/dev/null 2>&1 || true
+# KERNEL_CFG=<目录>：把调好的 W8A8 block FP8 kernel 配置（benchmark_w8a8_block_fp8.py 输出）逐个挂进包内 configs 目录，
+# 0.25.1 只在那里查找，不认 VLLM_TUNED_CONFIG_FOLDER
+MOUNTS=()
+if [[ -n ${KERNEL_CFG:-} ]]; then
+  KDIR=/usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs
+  for f in "$KERNEL_CFG"/*.json; do MOUNTS+=(-v "$f:$KDIR/$(basename "$f"):ro"); done
+fi
 # shellcheck disable=SC2086
 sudo docker run -d --name "$NAME" --ipc host \
   --gpus "\"device=$GPUS\"" -p "127.0.0.1:$PORT:8000" \
   -v "$MODEL_DIR":"$MODEL_DIR" \
   -v "$CACHE":/root/.cache/vllm \
   -e TORCHINDUCTOR_CACHE_DIR=/root/.cache/vllm/inductor \
-  -e TRITON_CACHE_DIR=/root/.cache/vllm/triton \
+  -e TRITON_CACHE_DIR=/root/.cache/vllm/triton "${MOUNTS[@]}" \
   "$IMAGE" "$M" --host 0.0.0.0 --port 8000 \
   --max-model-len 262144 --tensor-parallel-size "${TP:-2}" --kv-cache-dtype fp8 \
   --reasoning-parser qwen3 --enable-auto-tool-choice --tool-call-parser qwen3_coder \
