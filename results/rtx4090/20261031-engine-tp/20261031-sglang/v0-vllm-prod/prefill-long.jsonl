@@ -1,0 +1,1 @@
+{"input_len": 126976, "concurrency": 1, "requests": 1, "ok": 1, "errors": [], "ttft_p50_s": 62.22777467221022, "ttft_max_s": 62.22777467221022, "per_req_prefill_tok_s": 2040.5036283051459, "agg_prefill_tok_s": 2037.6538912113629, "wall_s": 62.31480260100216, "ts": "2026-10-31T00:56:05"}

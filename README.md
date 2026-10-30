@@ -30,9 +30,10 @@
 | 基线调优：max-num-seqs、prefix caching、MTP、gmu | 已验证（2026-09-29～30） | [docs/rtx4090/baseline.md](docs/rtx4090/baseline.md) |
 | Router：策略、故障摘除、请求体上限 | 已验证 | [docs/rtx4090/baseline.md#router](docs/rtx4090/baseline.md#router) |
 | 编译缓存三层持久化 | 已验证 | [docs/rtx4090/baseline.md#编译缓存](docs/rtx4090/baseline.md#编译缓存) |
-| DP4（4 个单卡副本）vs TP2×2 | **未验证** | [docs/rtx4090/roadmap.md](docs/rtx4090/roadmap.md) |
+| FP8 block kernel 调优；SGLang 对比；TP1 vs TP2（两卡） | 已验证（2026-10-31） | [docs/rtx4090/engine-tp.md](docs/rtx4090/engine-tp.md) |
+| DP4（4 个单卡副本）四卡实测 | **未验证** | [docs/rtx4090/roadmap.md](docs/rtx4090/roadmap.md) |
 | prefill 调度：max-num-batched-tokens 四档；与 RTX 3090 对比 | 已验证（2026-10-30） | [docs/rtx4090/prefill.md](docs/rtx4090/prefill.md) |
-| PP 对照、其他推理引擎同条件对比 | **未验证** | [docs/rtx4090/roadmap.md](docs/rtx4090/roadmap.md) |
+| PP 对照、HyperQwen 等其他引擎 | **未验证** | [docs/rtx4090/roadmap.md](docs/rtx4090/roadmap.md) |
 
 ## 代表性结果（定稿 vs 原部署）
 

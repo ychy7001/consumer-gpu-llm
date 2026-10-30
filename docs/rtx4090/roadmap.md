@@ -16,15 +16,15 @@
 | --- | --- | --- |
 | ~~prefill 调度~~ | 已完成，见 [prefill.md](prefill.md) | |
 | 长短请求隔离 | `--max-num-partial-prefills`/`--long-prefill-token-threshold` 能否在 mbt 8192 下保住短请求 TPOT P50 | mix-long TTFT、mix-chat TPOT P50 |
-| MTP 步数 | MTP3 是否在真实文本上继续收益 | real-c1/c16 TPOT、接受长度 |
+| ~~MTP 步数~~ | 批处理并发 24 下 MTP3 不占优，见 [engine-tp.md](engine-tp.md)；低并发真实文本未测 | |
 | PP2 vs TP2 | 两张 PCIe 卡上 PP 的流水线气泡是否抵得过 TP 的 all-reduce 开销 | 单流 TPOT、c16/c64 吞吐 |
-| 其他推理引擎 | 同模型同参数下与原版 vLLM 对比（候选：HyperQwen） | quick 套件全场景 |
+| 其他推理引擎 | SGLang 已测，见 [engine-tp.md](engine-tp.md)；HyperQwen（W4A16 + KVarN）待测 | quick 套件全场景 |
 
 ## 晚上（四张卡）
 
 | 实验 | 问题 | 判据 |
 | --- | --- | --- |
-| DP4 vs TP2×2 | 4 个单卡副本吞吐是否更高；单卡 KV 能否支撑 262k 上下文 | sweep-c64 吞吐、ctx200k 是否可调度、单卡 KV 池大小 |
+| DP4 vs TP2×2 | 两卡已验证 2×TP1 吞吐 +63%、262k 可启动（[engine-tp.md](engine-tp.md)）；待四卡含 embedding/reranker 混部实测 | 批处理吞吐、ctx200k 是否可调度、Router 4 worker |
 | TP4 单副本 | 长上下文 prefill 是否明显变快 | ctx128k/ctx200k TTFT |
 | Router 恢复时间 | 调小 `--cb-timeout-duration-secs` 能否缩短约 104s 的重新接流 | failover 时间线 |
 | 就绪后预热 | 先预热再接流能否消除首批 13–16s | 重启后首批请求延迟 |
