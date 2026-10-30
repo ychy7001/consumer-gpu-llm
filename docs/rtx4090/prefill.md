@@ -4,19 +4,19 @@
 
 ## 方法
 
-- 实验后端：GPU 2,3 上的单个 TP2 副本，直连 `:8005`，不走 Router。参数与生产相同（`--max-num-seqs 64`、prefix caching、MTP2、gmu 0.78、kv fp8），只改 mbt。脚本 [deploy_exp.sh](../scripts/deploy_exp.sh)。
-- 另一个副本（GPU 0,1）全程经 Router 服务线上流量，由 [guard_single_backend.sh](../scripts/guard_single_backend.sh) 监视：线上副本连续 2 分钟有排队、或到截止时间，就自动删实验容器、恢复第二个副本。
-- 场景测试 [exp_prefill.sh](../scripts/exp_prefill.sh)，基于 `vllm bench serve` 随机数据：
+- 实验后端：GPU 2,3 上的单个 TP2 副本，直连 `:8005`，不走 Router。参数与生产相同（`--max-num-seqs 64`、prefix caching、MTP2、gmu 0.78、kv fp8），只改 mbt。脚本 [deploy_exp.sh](../../scripts/deploy_exp.sh)。
+- 另一个副本（GPU 0,1）全程经 Router 服务线上流量，由 [guard_single_backend.sh](../../scripts/guard_single_backend.sh) 监视：线上副本连续 2 分钟有排队、或到截止时间，就自动删实验容器、恢复第二个副本。
+- 场景测试 [exp_prefill.sh](../../scripts/exp_prefill.sh)，基于 `vllm bench serve` 随机数据：
   - chat：512/256，并发 16
   - rag：4k/512，并发 16
   - summ：16k/1k，并发 8
   - ctx64k：64k/256，并发 4
   - mix-long + mix-chat：16k 输入并发 4 与 512/512 并发 8 同时跑，看长请求对短请求的干扰
-- 纯 prefill 探针 [prefill_probe.py](../scripts/prefill_probe.py)：随机 token id，每个请求都不同（不命中 prefix cache），`max_tokens 4`，按首个含文本的流式块计 TTFT。每档 3 轮。
+- 纯 prefill 探针 [prefill_probe.py](../../scripts/prefill_probe.py)：随机 token id，每个请求都不同（不命中 prefix cache），`max_tokens 4`，按首个含文本的流式块计 TTFT。每档 3 轮。
 - mbt 2048、4096 的场景测试在白天跑，8192、16384 在晚上跑；四档探针都在晚上跑。条件相同：都只有另一个副本在服务。
 - 每个场景只跑一次，样本数 8–96，差异在 10% 以内的视为噪声。
 
-原始数据：[results/20261030-prefill/](../results/20261030-prefill/)。
+原始数据：[results/20261030-prefill/](../../results/rtx4090/20261030-prefill/)。
 
 ## 结论
 
@@ -77,7 +77,7 @@ TTFT P50（s）/ 单请求 prefill tok/s。
 
 ## 与 RTX 3090 对比
 
-同一个探针，同参数，跑在本机一张 RTX 3090 24G 上。它用的是 HyperQwen 镜像（`ghcr.io/syv-ai/hyperqwen`）跑 Qwen3.8-27B-W4A16（AutoRound），MTP3，mbt 2048。
+同一个探针，同参数，跑在本机一张 RTX 3090 24G 上。它用的是 HyperQwen 镜像（`ghcr.io/syv-ai/hyperqwen`）跑 Qwen3.8-27B-W4A16（AutoRound），MTP3，mbt 2048。原始数据：[results/rtx3090/20261030-prefill-probe/](../../results/rtx3090/20261030-prefill-probe/)。
 
 | 输入 | 4090 48G ×2 FP8 TP2（mbt 2048） | 3090 24G ×1 W4A16 | 每卡比 |
 | --- | --- | --- | --- |

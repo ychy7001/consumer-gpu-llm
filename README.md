@@ -1,6 +1,13 @@
-# RTX 4090 48G LLM Serving
+# Consumer GPU LLM Serving
 
-在 4×RTX 4090 48G（PCIe，无 NVLink）上用 vLLM 部署 Qwen3.8-27B-FP8 的调优记录：部署脚本、压测套件、原始结果与结论。所有结论附原始数据，并明确区分「已验证」与「未验证」。
+在消费级 NVIDIA 显卡上部署 Qwen3.8-27B 的调优记录：部署脚本、压测套件、原始结果与结论。所有结论附原始数据，并明确区分「已验证」与「未验证」。
+
+| 硬件 | 部署 | 文档 |
+| --- | --- | --- |
+| 4× RTX 4090 48G（PCIe） | vLLM 0.25.1，FP8，2 个 TP2 副本 + Router | [docs/rtx4090/](docs/rtx4090/) |
+| 1× RTX 3090 24G | HyperQwen，W4A16 + INT8 激活，150k 上下文 | [docs/rtx3090/tuning.md](docs/rtx3090/tuning.md) |
+
+下文「环境」到「复现」都是 RTX 4090 这套。
 
 > 本项目不是 NVIDIA、Qwen 或 vLLM 官方发布。数据来自一台生产混部机器（同机还有其他业务），主机名与路径已替换。
 
@@ -20,12 +27,12 @@
 
 | 主题 | 状态 | 入口 |
 | --- | --- | --- |
-| 基线调优：max-num-seqs、prefix caching、MTP、gmu | 已验证（2026-09-29～30） | [docs/baseline.md](docs/baseline.md) |
-| Router：策略、故障摘除、请求体上限 | 已验证 | [docs/baseline.md#router](docs/baseline.md#router) |
-| 编译缓存三层持久化 | 已验证 | [docs/baseline.md#编译缓存](docs/baseline.md#编译缓存) |
-| DP4（4 个单卡副本）vs TP2×2 | **未验证** | [docs/roadmap.md](docs/roadmap.md) |
-| prefill 调度：max-num-batched-tokens 四档；与 RTX 3090 对比 | 已验证（2026-10-30） | [docs/prefill.md](docs/prefill.md) |
-| PP 对照、其他推理引擎同条件对比 | **未验证** | [docs/roadmap.md](docs/roadmap.md) |
+| 基线调优：max-num-seqs、prefix caching、MTP、gmu | 已验证（2026-09-29～30） | [docs/rtx4090/baseline.md](docs/rtx4090/baseline.md) |
+| Router：策略、故障摘除、请求体上限 | 已验证 | [docs/rtx4090/baseline.md#router](docs/rtx4090/baseline.md#router) |
+| 编译缓存三层持久化 | 已验证 | [docs/rtx4090/baseline.md#编译缓存](docs/rtx4090/baseline.md#编译缓存) |
+| DP4（4 个单卡副本）vs TP2×2 | **未验证** | [docs/rtx4090/roadmap.md](docs/rtx4090/roadmap.md) |
+| prefill 调度：max-num-batched-tokens 四档；与 RTX 3090 对比 | 已验证（2026-10-30） | [docs/rtx4090/prefill.md](docs/rtx4090/prefill.md) |
+| PP 对照、其他推理引擎同条件对比 | **未验证** | [docs/rtx4090/roadmap.md](docs/rtx4090/roadmap.md) |
 
 ## 代表性结果（定稿 vs 原部署）
 

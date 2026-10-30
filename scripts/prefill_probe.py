@@ -77,11 +77,13 @@ def main():
     ap.add_argument("--conc", default="1,4")
     ap.add_argument("--rounds", type=int, default=3, help="每个并发线程的请求数")
     a = ap.parse_args()
+    # 每次运行换一组种子：预热与正式测试若用同一组 id，正式第一轮会命中 prefix cache
+    salt = random.randrange(1 << 20) * 1000
     rows = []
     for n in map(int, a.lens.split(",")):
         for c in map(int, a.conc.split(",")):
             print(f"[{time.strftime('%T')}] in{n // 1024}k-c{c}", flush=True)
-            r = run(a.url, a.model, n, c, a.rounds, n + c)
+            r = run(a.url, a.model, n, c, a.rounds, salt + n + c)
             r["ts"] = time.strftime("%Y-%m-%dT%H:%M:%S")
             rows.append(r)
             with open(a.out, "a") as f:

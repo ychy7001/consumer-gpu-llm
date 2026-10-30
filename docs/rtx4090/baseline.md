@@ -1,6 +1,6 @@
 # 基线调优（2026-09-29～30）
 
-把一套「能跑」的部署调到「合理可用」。环境见 [README](../README.md#环境)。原部署的额外参数只有 `--max-num-seqs 6`，其余见 [deploy_llm.sh](../scripts/deploy_llm.sh)。
+把一套「能跑」的部署调到「合理可用」。环境见 [README](../../README.md#环境)。原部署的额外参数只有 `--max-num-seqs 6`，其余见 [deploy_llm.sh](../../scripts/deploy_llm.sh)。
 
 ## 定稿
 
@@ -21,19 +21,19 @@ Router 升级到 vllm-router 0.1.15，加 `--max-payload-size 67108864`，策略
 
 ## 方法
 
-每组实验重建两个后端，经 Router 跑同一套场景（[suite.sh](../scripts/suite.sh)）：
+每组实验重建两个后端，经 Router 跑同一套场景（[suite.sh](../../scripts/suite.sh)）：
 
 - `sweep-c{1..64}`：in1k/out256 吞吐-并发扫描。
 - `chat` 512/256、`rag` 4k/512、`summ` 16k/1k、`longout` 1k/2k：典型长度。
 - `prefix-c16`：共享 4k 前缀，评估 prefix caching。
-- `real-c16`/`real-c1`：[合成提示词](../data/real_prompts.jsonl) + chat 模板 + thinking，评估 MTP 这类与内容相关的优化。random token 的 MTP 接受率偏低，不能代表真实文本。
+- `real-c16`/`real-c1`：[合成提示词](../../data/real_prompts.jsonl) + chat 模板 + thinking，评估 MTP 这类与内容相关的优化。random token 的 MTP 接受率偏低，不能代表真实文本。
 - full 模式另加 64k/128k/200k 长上下文与 embedding/reranker。
 
 压测客户端是 `vllm bench serve`，常驻容器，`--network host`。每轮开跑前检查后端没有外部在途请求。
 
 ## 参数实验
 
-结果：[results/20260929-param-sweep/](../results/20260929-param-sweep/)（e1–e4、base、final）与 [results/20260929-30-llmbench/runs/](../results/20260929-30-llmbench/runs/)（MTP1、gmu）。
+结果：[results/20260929-param-sweep/](../../results/rtx4090/20260929-param-sweep/)（e1–e4、base、final）与 [results/20260929-30-llmbench/runs/](../../results/rtx4090/20260929-30-llmbench/runs/)（MTP1、gmu）。
 
 | 实验 | 参数 | 结论 |
 | --- | --- | --- |
@@ -67,7 +67,7 @@ Router 升级到 vllm-router 0.1.15，加 `--max-payload-size 67108864`，策略
 
 ## Router
 
-结果：[runs/20260930-*](../results/20260929-30-llmbench/runs/)、[failover-20260930-085854/](../results/20260929-30-llmbench/failover-20260930-085854/)。
+结果：[runs/20260930-*](../../results/rtx4090/20260929-30-llmbench/runs/)、[failover-20260930-085854/](../../results/rtx4090/20260929-30-llmbench/failover-20260930-085854/)。
 
 **请求体上限**：0.1.12 有约 2MB 硬上限，`--max-payload-size` 无效，超过返回 413；直连后端 20MB 正常。200k token 的中文请求经 `\uXXXX` 转义后更容易超限。0.1.15 修复。
 
@@ -100,7 +100,7 @@ cache_aware 把共享前缀的请求全部路由到同一个后端，另一个�
 
 ## 编译缓存
 
-结果：[compile-cache-20260930-091210/](../results/20260929-30-llmbench/compile-cache-20260930-091210/)。只重启一个后端，另一个继续服务。
+结果：[compile-cache-20260930-091210/](../../results/rtx4090/20260929-30-llmbench/compile-cache-20260930-091210/)。只重启一个后端，另一个继续服务。
 
 | 轮次 | docker start → /health 200 | init engine | 其中 compilation | 主模型 warmup |
 | --- | --- | --- | --- | --- |
@@ -116,7 +116,7 @@ vLLM 的编译缓存有三层：
 | inductor kernel | `/tmp/torchinductor_<user>` | 约 70s warmup |
 | triton kernel | `~/.triton/cache` | 计入上一项 |
 
-后两层默认在容器可写层：`docker stop/start` 能保留，重建容器（rm + run）就丢。所以只挂载 `~/.cache/vllm` 时，重建后 warmup 仍要约 70s。[deploy_llm.sh](../scripts/deploy_llm.sh) 设置 `TORCHINDUCTOR_CACHE_DIR`、`TRITON_CACHE_DIR` 指到已挂载的缓存卷里：
+后两层默认在容器可写层：`docker stop/start` 能保留，重建容器（rm + run）就丢。所以只挂载 `~/.cache/vllm` 时，重建后 warmup 仍要约 70s。[deploy_llm.sh](../../scripts/deploy_llm.sh) 设置 `TORCHINDUCTOR_CACHE_DIR`、`TRITON_CACHE_DIR` 指到已挂载的缓存卷里：
 
 | 重建方式（rm + run → 就绪） | 耗时 | init engine | warmup |
 | --- | --- | --- | --- |
