@@ -14,7 +14,8 @@
 
 | 实验 | 问题 | 判据 |
 | --- | --- | --- |
-| prefill 调度 | `max-num-batched-tokens`、chunked prefill 对长输入 TTFT 与并发 decode 长尾的取舍 | rag/summ/ctx64k 的 TTFT 与 TPOT P99 |
+| ~~prefill 调度~~ | 已完成，见 [prefill.md](prefill.md) | |
+| 长短请求隔离 | `--max-num-partial-prefills`/`--long-prefill-token-threshold` 能否在 mbt 8192 下保住短请求 TPOT P50 | mix-long TTFT、mix-chat TPOT P50 |
 | MTP 步数 | MTP3 是否在真实文本上继续收益 | real-c1/c16 TPOT、接受长度 |
 | PP2 vs TP2 | 两张 PCIe 卡上 PP 的流水线气泡是否抵得过 TP 的 all-reduce 开销 | 单流 TPOT、c16/c64 吞吐 |
 | 其他推理引擎 | 同模型同参数下与原版 vLLM 对比（候选：HyperQwen） | quick 套件全场景 |

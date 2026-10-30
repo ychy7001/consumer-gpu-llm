@@ -24,7 +24,8 @@
 | Router：策略、故障摘除、请求体上限 | 已验证 | [docs/baseline.md#router](docs/baseline.md#router) |
 | 编译缓存三层持久化 | 已验证 | [docs/baseline.md#编译缓存](docs/baseline.md#编译缓存) |
 | DP4（4 个单卡副本）vs TP2×2 | **未验证** | [docs/roadmap.md](docs/roadmap.md) |
-| 长上下文 prefill 调度、PP 对照、其他推理引擎对比 | **未验证** | [docs/roadmap.md](docs/roadmap.md) |
+| prefill 调度：max-num-batched-tokens 四档；与 RTX 3090 对比 | 已验证（2026-10-30） | [docs/prefill.md](docs/prefill.md) |
+| PP 对照、其他推理引擎同条件对比 | **未验证** | [docs/roadmap.md](docs/roadmap.md) |
 
 ## 代表性结果（定稿 vs 原部署）
 
@@ -37,7 +38,7 @@
 
 | 路径 | 内容 |
 | --- | --- |
-| [scripts/](scripts/) | `deploy_llm.sh` 重建后端；`suite.sh`/`bench.sh` 压测套件（基于 `vllm bench serve`）；`experiments.sh` 批量参数实验；`finalize.sh`/`failsafe.sh` 定稿与超时回滚；`sampler.sh` GPU 与指标采样；`summarize.py` 汇总表格 |
+| [scripts/](scripts/) | `deploy_llm.sh` 重建后端；`suite.sh`/`bench.sh` 压测套件（基于 `vllm bench serve`）；`experiments.sh` 批量参数实验；`finalize.sh`/`failsafe.sh` 定稿与超时回滚；`sampler.sh` GPU 与指标采样；`summarize.py` 汇总表格；`deploy_exp.sh`/`guard_single_backend.sh` 单副本实验容器与自动恢复；`exp_prefill.sh` prefill 场景；`prefill_probe.py` 纯 prefill 探针 |
 | [experiments/](experiments/) | 参数实验列表 |
 | [data/](data/) | 压测用合成提示词（非业务数据） |
 | [results/](results/) | 原始结果 JSON、GPU/指标采样 |

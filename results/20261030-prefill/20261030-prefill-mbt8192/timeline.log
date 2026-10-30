@@ -1,0 +1,12 @@
+[18:31:02] start chat --dataset-name random --ignore-eos --random-range-ratio 0.1 --random-input-len 512 --random-output-len 256 --max-concurrency 16 --num-prompts 96
+[18:32:24] end chat
+[18:32:24] start rag --dataset-name random --ignore-eos --random-range-ratio 0.1 --random-input-len 4096 --random-output-len 512 --max-concurrency 16 --num-prompts 64
+[18:35:06] end rag
+[18:35:06] start summ --dataset-name random --ignore-eos --random-range-ratio 0.1 --random-input-len 16384 --random-output-len 1024 --max-concurrency 8 --num-prompts 24
+[18:39:01] end summ
+[18:39:01] start ctx64k --dataset-name random --ignore-eos --random-range-ratio 0.1 --random-input-len 65536 --random-output-len 256 --max-concurrency 4 --num-prompts 8
+[18:42:50] end ctx64k
+[18:42:50] start mix-long --dataset-name random --ignore-eos --random-range-ratio 0.1 --random-input-len 16384 --random-output-len 128 --max-concurrency 4 --num-prompts 32
+[18:43:10] start mix-chat --dataset-name random --ignore-eos --random-range-ratio 0.1 --random-input-len 512 --random-output-len 512 --max-concurrency 8 --num-prompts 48
+[18:46:57] end mix-long
+[18:47:43] end mix-chat
