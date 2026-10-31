@@ -46,14 +46,31 @@
 | 短上下文快问快答 | 低并发，短输入 | single + DFlash2 | single + DFlash2 |
 
 - **3090 只要一套。** single + MTP 除 16 并发 decode（516 对 583）和 KV 池（181k 对 200k）外都不输 batch，单路 decode 快 1.8 倍（86 对 47）。KV 池 181k，一次只容得下一个长请求，高并发本来就不是它的场景。DFlash2 单路更快，但上下文上限 131072，不满足 150k。
-- **4090 资料库：single + MTP 16 槽与 batch 基本打平。** 前者 prefill 快 19%、c24 吞吐持平，代价是 TTFT P99 多 1.5 s、16 并发 decode 只有 batch 的 62%。客户端输出短时选前者，并发生成长文多时选后者。线上目前是 batch，等下面 4090 的 MTP 问题查清再决定是否切。
+- **4090 资料库：single + MTP 16 槽与 batch 基本打平。** 前者 prefill 快 19%、c24 吞吐持平，代价是 TTFT P99 多 1.5 s、16 并发 decode 只有 batch 的 62%。客户端输出短时选前者，并发生成长文多时选后者。改用 PTH 后 single + MTP 单路 103.5、c24 3614，已全面优于 batch（见下节），只有十几路同时长输出时 batch 仍占优。
 - 不开投机解码在两张卡上都没有优势，不作为 profile。
 
-## 尚未解决
+## 4090 慢的原因与修正（10-31 夜补测）
 
-- **4090 上 MTP 每步太慢。** 不开投机时每步约 18 ms（3090 约 21 ms，与带宽比一致）。开 MTP 后 4090 平均每步接受 3.29 个 token，比 3090 的 2.72 还高，但每步耗时约 50 ms，是普通步的 2.8 倍；3090 只有 1.5 倍。所以 4090 单路只有 65 tok/s，低于 3090 的 86。DFlash2 在 4090 上验证开销正常（单路 115），问题只在 MTP 路径。
-- **4090 上 DFlash2 长上下文 prefill 掉到 MTP 的 40%**（117k：987 对 2438），3090 上没有这个问题（1057 对 1091）。HyperQwen 在算力 8.6 的卡上默认走 FA2 fp8 KV 插件，4090 是 8.9，退回 int8 + Triton。
-- 两条都指向同一类原因：为 3090（sm_86）调的 kernel 在 4090（sm_89）上没生效。待查方向：4090 用 150k 上下文复测、草稿数降到 2、开关 `SPEC_ATTN`。
+两处异常都是 4090 没走对 attention 后端，与卡本身无关：
+
+- **MTP**：默认 FlashInfer 不支持多 token verify 的 FULL CUDA graph，启动时降为 PIECEWISE（日志 `cudagraph_mode=PIECEWISE`）。显式 `PTH_FA=1`（int8 per-token-head KV，target 与 drafter 都用）后恢复 FULL graph，单路 65.8 → 120.9 tok/s，接受长度不变（2.48）。只强制 PIECEWISE 复现退化（63.3），确认瓶颈在 graph 模式。
+- **DFlash2 长 prefill**：4090 是算力 8.9，`FA2_FP8KV` 默认关，退到 Triton。同参数下 117k prefill：Triton 988、FA2 2275、PTH 2629。FA2 插件虽只带 sm_86 cubin，在 4090 上实测可用。
+- 自动启用 PTH 的条件之一是 `VISION!=1`，所以开视觉时两张卡都要显式写 `PTH_FA=1`。
+
+完整套件（同镜像，`MAX_SEQS=16`）：
+
+| 4090 配置 | 单路 / c16 每路 | 117k prefill | 批处理 c24 | GSM8K | 结论 |
+| --- | --- | --- | --- | --- | --- |
+| MTP 默认（s-mtp-16） | 64 / 30 | 2430 | 3306 | 96.0% | 被替代 |
+| **MTP + PTH，CG=32** | **103.5** / 30 | 2435 | 3614 | **97.0%** | 推荐 |
+| MTP + PTH，CG=64 | 111.7 / 72 | 2432 | 4207 | 93.5% | 质量不过 |
+| **DFlash2 + PTH，CG=64** | **132.8** / 32 | 2631 | 3744 | 95.5% | 推荐（短对话优先） |
+| DFlash2 + PTH，CG=128 | 145.7 / 51 | 2623 | 4039 | 94.5% | 质量不过 |
+
+- 批处理客户端换成同镜像后基线为 3354，按此算 MTP + PTH 的 c24 输出吞吐 +7.8%。
+- CUDA graph 捕获上限加大（MTP 32→64、DFlash2 64→128）时 GSM8K 都掉到 95% 以下，原因未定位，先用小捕获上限。
+- DFlash2 的 `MAX_LEN` 要比 drafter 容量少 8（取 262136），否则启动失败。
+- MTP 草稿数 2/4、关闭异步调度、MAX_LEN 降到 150k 都没有收益。
 
 ## 启动参数
 
@@ -64,11 +81,11 @@
 -e VISION=1 -e PREFIX_CACHE=1 -e EXTRA_ARGS="$VIS_ARGS" ... single
 ```
 
-4090，single + MTP 16 槽（262k）。single 模式默认按 24G 卡固定 KV 池字节数，48G 卡要置空 `KV_MEM` 改按 `GPU_UTIL` 分配：
+4090，single + MTP + PTH（262k）。single 模式默认按 24G 卡固定 KV 池字节数，48G 卡要置空 `KV_MEM` 改按 `GPU_UTIL` 分配：
 
 ```bash
--e SPEC=mtp -e CTX=long -e INT8_ACT=int8 -e PREFILL_ATTN=int8 -e MTP_DRAFT_VOCAB=0 \
--e MAX_LEN=262144 -e GPU_UTIL=0.92 -e KV_MEM= -e MAX_SEQS=16 \
+-e SPEC=mtp -e CTX=long -e PTH_FA=1 -e INT8_ACT=int8 -e PREFILL_ATTN=int8 -e MTP_DRAFT_VOCAB=0 \
+-e MAX_LEN=262144 -e GPU_UTIL=0.92 -e KV_MEM= -e MAX_SEQS=16 -e CG=32 \
 -e VISION=1 -e PREFIX_CACHE=1 -e EXTRA_ARGS="$VIS_ARGS" ... single
 ```
 
