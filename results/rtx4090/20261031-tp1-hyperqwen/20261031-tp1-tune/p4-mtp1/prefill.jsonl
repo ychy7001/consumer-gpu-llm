@@ -1,0 +1,2 @@
+{"input_len": 2048, "concurrency": 1, "requests": 2, "ok": 2, "errors": [], "ttft_p50_s": 0.4823554389877245, "ttft_max_s": 0.4944439569953829, "per_req_prefill_tok_s": 4245.831671967774, "agg_prefill_tok_s": 3741.0935640344533, "wall_s": 1.094867030158639, "ts": "2026-10-31T09:07:16"}
+{"input_len": 16384, "concurrency": 1, "requests": 2, "ok": 2, "errors": [], "ttft_p50_s": 4.296126338536851, "ttft_max_s": 4.306165837915614, "per_req_prefill_tok_s": 3813.6681067856966, "agg_prefill_tok_s": 3740.4445797291355, "wall_s": 8.760455956915393, "ts": "2026-10-31T09:07:24"}

@@ -71,4 +71,4 @@ prefill 单位 tok/s，decode 单位 tok/s（16 路为总输出）。2×TP1 两�
 - 单卡 KV 池只有约 1.15 个 262k 请求：一个超长请求会占满所在副本，其他请求只能排到别的副本。
 - GPU 0、2 上还有 embedding 和 reranker（各约 4.4 GB），这两张卡的 gmu 要取 0.88。
 
-四卡验证还没做：需要停掉全部副本，另约时间。
+四卡验证还没做：需要停掉全部副本，另约时间。后续单卡调参与 HyperQwen 替换见 [tp1-hyperqwen.md](tp1-hyperqwen.md)。

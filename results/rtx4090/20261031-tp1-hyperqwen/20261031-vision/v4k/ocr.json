@@ -1,0 +1,132 @@
+{
+ "summary": {
+  "wall_s": 80.0,
+  "ok": 12,
+  "n": 12,
+  "multi_ok": true,
+  "multi": {
+   "ok": true,
+   "s": 16.75637698173523,
+   "prompt_tokens": 13406,
+   "completion_tokens": 630
+  },
+  "cer_scan": 0.0008,
+  "ptok_scan": 4218,
+  "cer_shot": 0.0003,
+  "ptok_shot": 3010,
+  "cer_photo": 0.0013,
+  "ptok_photo": 4223,
+  "cer_all": 0.0008,
+  "ptok_all": 3817
+ },
+ "rows": [
+  {
+   "file": "00-scan.png",
+   "kind": "scan",
+   "ok": true,
+   "s": 34.88703489303589,
+   "prompt_tokens": 4218,
+   "completion_tokens": 1315,
+   "cer": 0.0015
+  },
+  {
+   "file": "01-scan.png",
+   "kind": "scan",
+   "ok": true,
+   "s": 32.56471347808838,
+   "prompt_tokens": 4218,
+   "completion_tokens": 1266,
+   "cer": 0.0016
+  },
+  {
+   "file": "04-scan.png",
+   "kind": "scan",
+   "ok": true,
+   "s": 23.542993783950806,
+   "prompt_tokens": 4218,
+   "completion_tokens": 827,
+   "cer": 0.0
+  },
+  {
+   "file": "05-scan.png",
+   "kind": "scan",
+   "ok": true,
+   "s": 22.155894994735718,
+   "prompt_tokens": 4218,
+   "completion_tokens": 789,
+   "cer": 0.0
+  },
+  {
+   "file": "08-shot.png",
+   "kind": "shot",
+   "ok": true,
+   "s": 14.546353101730347,
+   "prompt_tokens": 2230,
+   "completion_tokens": 539,
+   "cer": 0.0
+  },
+  {
+   "file": "09-shot.png",
+   "kind": "shot",
+   "ok": true,
+   "s": 15.888654470443726,
+   "prompt_tokens": 2230,
+   "completion_tokens": 570,
+   "cer": 0.0
+  },
+  {
+   "file": "11-shot.png",
+   "kind": "shot",
+   "ok": true,
+   "s": 18.16917324066162,
+   "prompt_tokens": 3790,
+   "completion_tokens": 640,
+   "cer": 0.0
+  },
+  {
+   "file": "12-shot.png",
+   "kind": "shot",
+   "ok": true,
+   "s": 36.62008857727051,
+   "prompt_tokens": 3790,
+   "completion_tokens": 1505,
+   "cer": 0.0011
+  },
+  {
+   "file": "14-photo.jpg",
+   "kind": "photo",
+   "ok": true,
+   "s": 23.203061819076538,
+   "prompt_tokens": 4205,
+   "completion_tokens": 945,
+   "cer": 0.0015
+  },
+  {
+   "file": "15-photo.jpg",
+   "kind": "photo",
+   "ok": true,
+   "s": 23.55618190765381,
+   "prompt_tokens": 4205,
+   "completion_tokens": 961,
+   "cer": 0.0015
+  },
+  {
+   "file": "16-photo.jpg",
+   "kind": "photo",
+   "ok": true,
+   "s": 19.881040811538696,
+   "prompt_tokens": 4205,
+   "completion_tokens": 854,
+   "cer": 0.0
+  },
+  {
+   "file": "17-photo.jpg",
+   "kind": "photo",
+   "ok": true,
+   "s": 20.027580499649048,
+   "prompt_tokens": 4278,
+   "completion_tokens": 967,
+   "cer": 0.0022
+  }
+ ]
+}
