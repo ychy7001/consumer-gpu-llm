@@ -61,7 +61,7 @@ OCR 质量用合成中文图测（[scripts/gen_ocr_set.py](../../scripts/gen_ocr
 - 打开视觉对文本吞吐没有影响，KV 池只少 2%。
 - 8k 上限的 CER 与 vLLM 不限分辨率持平，耗时只有一半。选 8k。
 - MTP1 在 c24 持平、c48 降 8%（3621 → 3315），KV 池少 8%，5 图请求断连，单路 decode 反而从 55 降到 51 tok/s。batch 模式下不采用。
-- 这组 MTP 只是 batch 模式里用 `--speculative-config` 硬加的 k=1，模型是基础版。RTX 3090 上单路约 85 tok/s 的是 single 模式：fast 变体（int4 lm_head 与 MTP 头、自带 draft 词表）、k=3、split-KV verify、max-num-seqs 8。这条路在 4090 上**未验证**。
+- 这组 MTP 只是 batch 模式里用 `--speculative-config` 硬加的 k=1，模型是基础版。RTX 3090 上单路约 85 tok/s 的是 single 模式：fast 变体（int4 lm_head 与 MTP 头、自带 draft 词表）、k=3、split-KV verify、max-num-seqs 8。10-31 晚已在 4090 上补测，见 [../profiles.md](../profiles.md)。
 
 ## 生产替换
 

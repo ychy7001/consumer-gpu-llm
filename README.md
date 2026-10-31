@@ -32,6 +32,7 @@
 | 编译缓存三层持久化 | 已验证 | [docs/rtx4090/baseline.md#编译缓存](docs/rtx4090/baseline.md#编译缓存) |
 | FP8 block kernel 调优；SGLang 对比；TP1 vs TP2（两卡） | 已验证（2026-10-31） | [docs/rtx4090/engine-tp.md](docs/rtx4090/engine-tp.md) |
 | 单卡 TP1 调参、vLLM 0.31、HyperQwen 量化、视觉与 MTP、生产替换 | 已验证（2026-10-31） | [docs/rtx4090/tp1-hyperqwen.md](docs/rtx4090/tp1-hyperqwen.md) |
+| 单卡 profile：single / batch 模式按场景选择（4090 与 3090 同一套测试） | 已验证（2026-10-31） | [docs/profiles.md](docs/profiles.md) |
 | DP4（4 个单卡副本）四卡实测 | **未验证** | [docs/rtx4090/roadmap.md](docs/rtx4090/roadmap.md) |
 | prefill 调度：max-num-batched-tokens 四档；与 RTX 3090 对比 | 已验证（2026-10-30） | [docs/rtx4090/prefill.md](docs/rtx4090/prefill.md) |
 | PP 对照、HyperQwen 等其他引擎 | **未验证** | [docs/rtx4090/roadmap.md](docs/rtx4090/roadmap.md) |

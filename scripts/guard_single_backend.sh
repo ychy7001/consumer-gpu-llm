@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # 单后端实验守护：在线后端持续排队或到达截止时间时，停实验容器、恢复被停后端并接回 Router
-# 用法: guard_single_backend.sh <截止时间 "HH:MM"> [在线端口=8003] [被停容器=vllm-tp2-b] [被停端口=8004] [实验容器=vllm-exp]
+# 用法: guard_single_backend.sh <截止时间 "HH:MM"> [在线端口=8003，多个用逗号分隔，排队数取合计] [被停容器=vllm-tp2-b] [被停端口=8004] [实验容器=vllm-exp]
 #   连续 WAIT_LIMIT 次（每 15s 一次）waiting>WAIT_MIN 视为持续排队（批处理负载可调高 WAIT_MIN）；创建 $STOP_FILE 可手动结束守护（不恢复），
 #   创建 $RESTORE_FILE 立即恢复（实验脚本跑完时用）
 set -u
@@ -15,6 +15,7 @@ restore() {
   log "restore: $1"
   # shellcheck disable=SC2086
   sudo docker rm -f $EXP >/dev/null 2>&1 || true
+  sudo docker update --restart=always "$HELD" >/dev/null
   sudo docker start "$HELD" >/dev/null
   for _ in $(seq 1 90); do curl -sf -m3 "127.0.0.1:$HELD_PORT/health" >/dev/null && break; sleep 10; done
   # 预热后再接回 Router
@@ -33,7 +34,10 @@ while true; do
   [[ -f $STOP_FILE ]] && { log "stop file, exit without restore"; exit 0; }
   [[ -f $RESTORE_FILE ]] && { rm -f "$RESTORE_FILE"; restore "restore file"; }
   (( $(date +%s) >= DEADLINE )) && restore "deadline"
-  w=$(curl -s -m5 "127.0.0.1:$LIVE/metrics" | awk '/^vllm:num_requests_waiting[ {]/ && !/by_reason/{s+=$2}END{print int(s)}')
+  w=0
+  for p in ${LIVE//,/ }; do
+    w=$((w + $(curl -s -m5 "127.0.0.1:$p/metrics" | awk '/^vllm:num_requests_waiting[ {]/ && !/by_reason/{s+=$2}END{print int(s)}')))
+  done
   if [[ ${w:-0} -gt $WAIT_MIN ]]; then n=$((n+1)); else n=0; fi
   (( n >= WAIT_LIMIT )) && restore "live backend waiting ${w} for $((n*15))s"
   sleep 15
