@@ -49,5 +49,5 @@ batch 实例参数：`KV=fp8 INT8_ACT=int8 MAX_LEN=262144 PREFIX_CACHE=1 VISION=
 
 ## 未解决
 
-- 扩大 CUDA graph 捕获尺寸后 GSM8K 低于 95%（MTP CG32→64、DFlash CG64→128），原因排查中；GPU3 在此之前保持 CG32。
+- 扩大 CUDA graph 捕获尺寸后 GSM8K 低于 95% 的现象，复跑 3 次后判为噪声（[profiles.md](../profiles.md)）。GPU3 是否改 CG64（16 路 decode 每路 30→72 tok/s）待灰度有真实流量后再定。
 - GPU3 灰度（single + MTP + PTH）尚无真实业务流量对比。
