@@ -24,7 +24,7 @@
 
 | 实验 | 问题 | 判据 |
 | --- | --- | --- |
-| DP4 vs TP2×2 | 两卡已验证 2×TP1 吞吐 +63%、262k 可启动（[engine-tp.md](engine-tp.md)）；待四卡含 embedding/reranker 混部实测 | 批处理吞吐、ctx200k 是否可调度、Router 4 worker |
+| DP4 vs TP2×2 | 已验证（11-01）：四卡 HyperQwen 合计 1.05–1.3 万 tok/s，约旧部署 2.2–2.8 倍；cache_aware 共享前缀全压一台，保持 power_of_two（[dp4.md](dp4.md)） | 批处理吞吐、ctx200k 是否可调度、Router 4 worker |
 | TP4 单副本 | 长上下文 prefill 是否明显变快 | ctx128k/ctx200k TTFT |
 | Router 恢复时间 | 调小 `--cb-timeout-duration-secs` 能否缩短约 104s 的重新接流 | failover 时间线 |
 | 就绪后预热 | 先预热再接流能否消除首批 13–16s | 重启后首批请求延迟 |

@@ -1,0 +1,924 @@
+{
+ "model": "Qwen3.8-27B-FP8",
+ "url": "http://127.0.0.1:8003",
+ "summary": {
+  "mk@32k": {
+   "n": 5,
+   "score": 1.0,
+   "exact": 5,
+   "err": 0,
+   "tok": 32824
+  },
+  "vt@32k": {
+   "n": 5,
+   "score": 0.321,
+   "exact": 0,
+   "err": 0,
+   "tok": 32612
+  },
+  "mk@64k": {
+   "n": 5,
+   "score": 1.0,
+   "exact": 5,
+   "err": 0,
+   "tok": 64845
+  },
+  "vt@64k": {
+   "n": 5,
+   "score": 0.587,
+   "exact": 1,
+   "err": 0,
+   "tok": 64125
+  },
+  "mk@128k": {
+   "n": 5,
+   "score": 1.0,
+   "exact": 5,
+   "err": 0,
+   "tok": 129102
+  },
+  "vt@128k": {
+   "n": 5,
+   "score": 0.573,
+   "exact": 2,
+   "err": 0,
+   "tok": 129218
+  },
+  "mk@200k": {
+   "n": 5,
+   "score": 1.0,
+   "exact": 5,
+   "err": 0,
+   "tok": 202021
+  },
+  "vt@200k": {
+   "n": 5,
+   "score": 0.46,
+   "exact": 0,
+   "err": 0,
+   "tok": 200584
+  }
+ },
+ "rows": [
+  {
+   "task": "mk",
+   "len": 32000,
+   "trial": 0,
+   "prompt_tokens": 32824,
+   "score": 1.0,
+   "depth": [
+    0.327,
+    0.889,
+    0.602,
+    0.523
+   ],
+   "gold": {
+    "falcon-quartz": "1773840",
+    "nickel-xenon": "4205833",
+    "pepper-quartz": "8818492",
+    "garnet-birch": "7416099"
+   },
+   "answer": "falcon-quartz: 1773840\nnickel-xenon: 4205833\npepper-quartz: 8818492\ngarnet-birch: 7416099",
+   "err": null,
+   "sec": 26.9
+  },
+  {
+   "task": "vt",
+   "len": 32000,
+   "trial": 0,
+   "prompt_tokens": 32612,
+   "score": 0.25,
+   "depth": [
+    0.125,
+    0.972
+   ],
+   "gold": [
+    "KES7",
+    "LUM2",
+    "LUM8",
+    "NIC1",
+    "QUA8"
+   ],
+   "answer": "KES7 LUM8 COB4 GAR5 JUN8",
+   "err": null,
+   "sec": 27.0
+  },
+  {
+   "task": "mk",
+   "len": 32000,
+   "trial": 1,
+   "prompt_tokens": 32382,
+   "score": 1.0,
+   "depth": [
+    0.513,
+    0.119,
+    0.022,
+    0.619
+   ],
+   "gold": {
+    "umber-xenon": "3643967",
+    "lumen-yarrow": "6453151",
+    "zephyr-xenon": "1263977",
+    "indigo-quartz": "3398507"
+   },
+   "answer": "umber-xenon: 3643967\nlumen-yarrow: 6453151\nzephyr-xenon: 1263977\nindigo-quartz: 3398507",
+   "err": null,
+   "sec": 25.8
+  },
+  {
+   "task": "vt",
+   "len": 32000,
+   "trial": 1,
+   "prompt_tokens": 30895,
+   "score": 0.3333333333333333,
+   "depth": [
+    0.141,
+    0.942
+   ],
+   "gold": [
+    "COB4",
+    "HAR6",
+    "IND5",
+    "KES3",
+    "NIC9"
+   ],
+   "answer": "NIC9 COB4 HAR6 IND5 SAF1 UMB6 HAR8 VIO2 YAR3 FAL9 MEA0",
+   "err": null,
+   "sec": 31.6
+  },
+  {
+   "task": "mk",
+   "len": 32000,
+   "trial": 2,
+   "prompt_tokens": 31609,
+   "score": 1.0,
+   "depth": [
+    0.435,
+    0.731,
+    0.491,
+    0.008
+   ],
+   "gold": {
+    "nickel-garnet": "5368292",
+    "raven-willow": "7417252",
+    "saffron-juniper": "9148506",
+    "delta-zephyr": "1933573"
+   },
+   "answer": "nickel-garnet: 5368292\nraven-willow: 7417252\nsaffron-juniper: 9148506\ndelta-zephyr: 1933573",
+   "err": null,
+   "sec": 25.6
+  },
+  {
+   "task": "vt",
+   "len": 32000,
+   "trial": 2,
+   "prompt_tokens": 32508,
+   "score": 0.5555555555555556,
+   "depth": [
+    0.08,
+    0.945
+   ],
+   "gold": [
+    "DEL6",
+    "FAL2",
+    "SAF3",
+    "YAR0",
+    "YAR6"
+   ],
+   "answer": "YAR6 FAL2 YAR0 SAF3 DEL6 ONY4 RAV2 TUN5 ONY5",
+   "err": null,
+   "sec": 26.4
+  },
+  {
+   "task": "mk",
+   "len": 32000,
+   "trial": 3,
+   "prompt_tokens": 31524,
+   "score": 1.0,
+   "depth": [
+    0.003,
+    0.534,
+    0.116,
+    0.016
+   ],
+   "gold": {
+    "ember-nickel": "9007426",
+    "kestrel-juniper": "7429946",
+    "willow-juniper": "6540251",
+    "cobalt-indigo": "3627242"
+   },
+   "answer": "ember-nickel: 9007426\nkestrel-juniper: 7429946\nwillow-juniper: 6540251\ncobalt-indigo: 3627242",
+   "err": null,
+   "sec": 26.6
+  },
+  {
+   "task": "vt",
+   "len": 32000,
+   "trial": 3,
+   "prompt_tokens": 30788,
+   "score": 0.1111111111111111,
+   "depth": [
+    0.085,
+    0.955
+   ],
+   "gold": [
+    "EMB6",
+    "ONY7",
+    "RAV8",
+    "SAF4",
+    "YAR1"
+   ],
+   "answer": "VAR YAR1 VAR IND0 VAR IND3 VAR UMB5 VAR WIL3",
+   "err": null,
+   "sec": 20.0
+  },
+  {
+   "task": "mk",
+   "len": 32000,
+   "trial": 4,
+   "prompt_tokens": 31666,
+   "score": 1.0,
+   "depth": [
+    0.942,
+    0.513,
+    0.528,
+    0.529
+   ],
+   "gold": {
+    "meadow-delta": "7820795",
+    "tundra-umber": "5626529",
+    "garnet-saffron": "5986788",
+    "nickel-zephyr": "5677602"
+   },
+   "answer": "meadow-delta: 7820795\ntundra-umber: 5626529\ngarnet-saffron: 5986788\nnickel-zephyr: 5677602",
+   "err": null,
+   "sec": 26.3
+  },
+  {
+   "task": "vt",
+   "len": 32000,
+   "trial": 4,
+   "prompt_tokens": 32131,
+   "score": 0.35714285714285715,
+   "depth": [
+    0.05,
+    0.977
+   ],
+   "gold": [
+    "BIR5",
+    "COB4",
+    "EMB8",
+    "ONY9",
+    "WIL8"
+   ],
+   "answer": "EMB8\nFAL8\nIND9\nSAF2\nTUN0\nYAR6\nWIL3\nCOB9\nKES2\nCOB4\nONY9\nBIR5\nWIL8\nUMB5",
+   "err": null,
+   "sec": 32.8
+  },
+  {
+   "task": "mk",
+   "len": 64000,
+   "trial": 0,
+   "prompt_tokens": 62555,
+   "score": 1.0,
+   "depth": [
+    0.897,
+    0.779,
+    0.872,
+    0.468
+   ],
+   "gold": {
+    "amber-nickel": "3770439",
+    "harbor-juniper": "2557133",
+    "lumen-xenon": "8838261",
+    "garnet-juniper": "4009983"
+   },
+   "answer": "amber-nickel: 3770439\nharbor-juniper: 2557133\nlumen-xenon: 8838261\ngarnet-juniper: 4009983",
+   "err": null,
+   "sec": 41.4
+  },
+  {
+   "task": "vt",
+   "len": 64000,
+   "trial": 0,
+   "prompt_tokens": 63155,
+   "score": 0.8,
+   "depth": [
+    0.086,
+    0.976
+   ],
+   "gold": [
+    "GAR2",
+    "HAR9",
+    "IND3",
+    "JUN2",
+    "XEN1"
+   ],
+   "answer": "VAR XEN1 VAR JUN2 VAR GAR2 VAR HAR9",
+   "err": null,
+   "sec": 53.1
+  },
+  {
+   "task": "mk",
+   "len": 64000,
+   "trial": 1,
+   "prompt_tokens": 64845,
+   "score": 1.0,
+   "depth": [
+    0.372,
+    0.646,
+    0.514,
+    0.219
+   ],
+   "gold": {
+    "amber-meadow": "8670324",
+    "umber-birch": "5330922",
+    "violet-juniper": "8616458",
+    "yarrow-juniper": "7432147"
+   },
+   "answer": "amber-meadow: 8670324\number-birch: 5330922\nviolet-juniper: 8616458\nyarrow-juniper: 7432147",
+   "err": null,
+   "sec": 56.7
+  },
+  {
+   "task": "vt",
+   "len": 64000,
+   "trial": 1,
+   "prompt_tokens": 64125,
+   "score": 0.0,
+   "depth": [
+    0.011,
+    0.854
+   ],
+   "gold": [
+    "LUM1",
+    "NIC6",
+    "SAF1",
+    "YAR4",
+    "YAR8"
+   ],
+   "answer": "TUN9",
+   "err": null,
+   "sec": 53.9
+  },
+  {
+   "task": "mk",
+   "len": 64000,
+   "trial": 2,
+   "prompt_tokens": 63902,
+   "score": 1.0,
+   "depth": [
+    0.034,
+    0.257,
+    0.502,
+    0.5
+   ],
+   "gold": {
+    "meadow-tundra": "5575188",
+    "cobalt-indigo": "1939594",
+    "amber-umber": "2036452",
+    "harbor-zephyr": "5971668"
+   },
+   "answer": "meadow-tundra: 5575188\ncobalt-indigo: 1939594\namber-umber: 2036452\nharbor-zephyr: 5971668",
+   "err": null,
+   "sec": 55.8
+  },
+  {
+   "task": "vt",
+   "len": 64000,
+   "trial": 2,
+   "prompt_tokens": 63832,
+   "score": 1.0,
+   "depth": [
+    0.127,
+    0.936
+   ],
+   "gold": [
+    "AMB5",
+    "BIR2",
+    "FAL1",
+    "FAL9",
+    "MEA4"
+   ],
+   "answer": "AMB5 FAL9 BIR2 FAL1 MEA4",
+   "err": null,
+   "sec": 59.0
+  },
+  {
+   "task": "mk",
+   "len": 64000,
+   "trial": 3,
+   "prompt_tokens": 63205,
+   "score": 1.0,
+   "depth": [
+    0.971,
+    0.995,
+    0.871,
+    0.094
+   ],
+   "gold": {
+    "falcon-pepper": "7994948",
+    "quartz-yarrow": "8456738",
+    "cobalt-tundra": "7045671",
+    "nickel-umber": "9045600"
+   },
+   "answer": "falcon-pepper: 7994948\nquartz-yarrow: 8456738\ncobalt-tundra: 7045671\nnickel-umber: 9045600",
+   "err": null,
+   "sec": 56.9
+  },
+  {
+   "task": "vt",
+   "len": 64000,
+   "trial": 3,
+   "prompt_tokens": 63727,
+   "score": 0.3333333333333333,
+   "depth": [
+    0.009,
+    0.964
+   ],
+   "gold": [
+    "FAL5",
+    "RAV4",
+    "TUN2",
+    "UMB9",
+    "XEN9"
+   ],
+   "answer": "BIR7 TUN2 UMB9",
+   "err": null,
+   "sec": 54.8
+  },
+  {
+   "task": "mk",
+   "len": 64000,
+   "trial": 4,
+   "prompt_tokens": 61564,
+   "score": 1.0,
+   "depth": [
+    0.938,
+    0.554,
+    0.364,
+    0.454
+   ],
+   "gold": {
+    "amber-onyx": "1824388",
+    "xenon-meadow": "4565135",
+    "ember-pepper": "7072263",
+    "violet-lumen": "7218601"
+   },
+   "answer": "amber-onyx: 1824388\nxenon-meadow: 4565135\nember-pepper: 7072263\nviolet-lumen: 7218601",
+   "err": null,
+   "sec": 55.2
+  },
+  {
+   "task": "vt",
+   "len": 64000,
+   "trial": 4,
+   "prompt_tokens": 61476,
+   "score": 0.8,
+   "depth": [
+    0.043,
+    0.933
+   ],
+   "gold": [
+    "KES7",
+    "QUA6",
+    "XEN2",
+    "YAR2",
+    "YAR7"
+   ],
+   "answer": "VAR YAR2 VAR KES7 VAR YAR7 VAR QUA6",
+   "err": null,
+   "sec": 57.4
+  },
+  {
+   "task": "mk",
+   "len": 128000,
+   "trial": 0,
+   "prompt_tokens": 125419,
+   "score": 1.0,
+   "depth": [
+    0.317,
+    0.306,
+    0.851,
+    0.21
+   ],
+   "gold": {
+    "meadow-quartz": "9356909",
+    "meadow-xenon": "9388203",
+    "violet-yarrow": "8491166",
+    "cobalt-garnet": "8454613"
+   },
+   "answer": "meadow-quartz: 9356909\nmeadow-xenon: 9388203\nviolet-yarrow: 8491166\ncobalt-garnet: 8454613",
+   "err": null,
+   "sec": 91.8
+  },
+  {
+   "task": "vt",
+   "len": 128000,
+   "trial": 0,
+   "prompt_tokens": 125342,
+   "score": 1.0,
+   "depth": [
+    0.012,
+    0.959
+   ],
+   "gold": [
+    "GAR1",
+    "HAR1",
+    "VIO0",
+    "XEN4",
+    "ZEP7"
+   ],
+   "answer": "GAR1 XEN4 HAR1 ZEP7 VIO0",
+   "err": null,
+   "sec": 127.0
+  },
+  {
+   "task": "mk",
+   "len": 128000,
+   "trial": 1,
+   "prompt_tokens": 127321,
+   "score": 1.0,
+   "depth": [
+    0.617,
+    0.628,
+    0.13,
+    0.563
+   ],
+   "gold": {
+    "willow-tundra": "3437051",
+    "kestrel-amber": "7839361",
+    "birch-indigo": "8759564",
+    "zephyr-falcon": "1352060"
+   },
+   "answer": "willow-tundra: 3437051\nkestrel-amber: 7839361\nbirch-indigo: 8759564\nzephyr-falcon: 1352060",
+   "err": null,
+   "sec": 128.8
+  },
+  {
+   "task": "vt",
+   "len": 128000,
+   "trial": 1,
+   "prompt_tokens": 129218,
+   "score": 1.0,
+   "depth": [
+    0.037,
+    0.931
+   ],
+   "gold": [
+    "COB0",
+    "COB2",
+    "IND9",
+    "NIC5",
+    "TUN3"
+   ],
+   "answer": "IND9 COB2 NIC5 TUN3 COB0",
+   "err": null,
+   "sec": 131.5
+  },
+  {
+   "task": "mk",
+   "len": 128000,
+   "trial": 2,
+   "prompt_tokens": 128554,
+   "score": 1.0,
+   "depth": [
+    0.204,
+    0.171,
+    0.192,
+    0.173
+   ],
+   "gold": {
+    "ember-indigo": "7145103",
+    "quartz-saffron": "7022932",
+    "harbor-nickel": "4575994",
+    "saffron-ember": "8765780"
+   },
+   "answer": "ember-indigo: 7145103\nquartz-saffron: 7022932\nharbor-nickel: 4575994\nsaffron-ember: 8765780",
+   "err": null,
+   "sec": 133.8
+  },
+  {
+   "task": "vt",
+   "len": 128000,
+   "trial": 2,
+   "prompt_tokens": 125337,
+   "score": 0.36363636363636365,
+   "depth": [
+    0.066,
+    0.86
+   ],
+   "gold": [
+    "COB6",
+    "GAR5",
+    "GAR8",
+    "HAR8",
+    "NIC6"
+   ],
+   "answer": "NIC6 HAR8 GAR5 SAF9 WIL7 RAV0 JUN0 COB6 COB7 KES5",
+   "err": null,
+   "sec": 135.8
+  },
+  {
+   "task": "mk",
+   "len": 128000,
+   "trial": 3,
+   "prompt_tokens": 128325,
+   "score": 1.0,
+   "depth": [
+    0.365,
+    0.085,
+    0.865,
+    0.433
+   ],
+   "gold": {
+    "umber-lumen": "7988145",
+    "saffron-xenon": "4395458",
+    "quartz-violet": "8202453",
+    "delta-garnet": "5718338"
+   },
+   "answer": "umber-lumen: 7988145\nsaffron-xenon: 4395458\nquartz-violet: 8202453\ndelta-garnet: 5718338",
+   "err": null,
+   "sec": 130.5
+  },
+  {
+   "task": "vt",
+   "len": 128000,
+   "trial": 3,
+   "prompt_tokens": 128670,
+   "score": 0.3,
+   "depth": [
+    0.037,
+    0.975
+   ],
+   "gold": [
+    "EMB0",
+    "HAR5",
+    "WIL7",
+    "ZEP8",
+    "ZEP9"
+   ],
+   "answer": "ZEP8 EMB0 HAR5 KES4 SAF8 QUA9 RAV1 PEP0",
+   "err": null,
+   "sec": 131.0
+  },
+  {
+   "task": "mk",
+   "len": 128000,
+   "trial": 4,
+   "prompt_tokens": 129102,
+   "score": 1.0,
+   "depth": [
+    0.867,
+    0.332,
+    0.89,
+    0.194
+   ],
+   "gold": {
+    "falcon-amber": "2719199",
+    "birch-lumen": "8226666",
+    "birch-saffron": "8886156",
+    "willow-quartz": "9101993"
+   },
+   "answer": "falcon-amber: 2719199\nbirch-lumen: 8226666\nbirch-saffron: 8886156\nwillow-quartz: 9101993",
+   "err": null,
+   "sec": 133.4
+  },
+  {
+   "task": "vt",
+   "len": 128000,
+   "trial": 4,
+   "prompt_tokens": 125775,
+   "score": 0.2,
+   "depth": [
+    0.019,
+    0.815
+   ],
+   "gold": [
+    "BIR9",
+    "ONY8",
+    "SAF8",
+    "TUN8",
+    "YAR7"
+   ],
+   "answer": "TUN8 ONY8 SAF8 BIR4 HAR7 EMB9 WIL9 UMB3 XEN1 SAF3 QUA2 NIC1 VIO1",
+   "err": null,
+   "sec": 134.7
+  },
+  {
+   "task": "mk",
+   "len": 200000,
+   "trial": 0,
+   "prompt_tokens": 197964,
+   "score": 1.0,
+   "depth": [
+    0.621,
+    0.272,
+    0.174,
+    0.611
+   ],
+   "gold": {
+    "tundra-harbor": "7853654",
+    "violet-kestrel": "9642394",
+    "garnet-delta": "2863155",
+    "lumen-yarrow": "8647136"
+   },
+   "answer": "tundra-harbor: 7853654\nviolet-kestrel: 9642394\ngarnet-delta: 2863155\nlumen-yarrow: 8647136",
+   "err": null,
+   "sec": 184.2
+  },
+  {
+   "task": "vt",
+   "len": 200000,
+   "trial": 0,
+   "prompt_tokens": 196867,
+   "score": 0.23076923076923078,
+   "depth": [
+    0.039,
+    0.949
+   ],
+   "gold": [
+    "COB2",
+    "NIC6",
+    "UMB3",
+    "WIL0",
+    "ZEP1"
+   ],
+   "answer": "VAR WIL5 VAR HAR3 VAR NIC6 VAR UMB8 VAR XEN4 VAR WIL0 VAR UMB3 VAR JUN0 VAR TUN3 VAR TUN1 VAR UMB9",
+   "err": null,
+   "sec": 238.0
+  },
+  {
+   "task": "mk",
+   "len": 200000,
+   "trial": 1,
+   "prompt_tokens": 202021,
+   "score": 1.0,
+   "depth": [
+    0.574,
+    0.181,
+    0.142,
+    0.232
+   ],
+   "gold": {
+    "xenon-cobalt": "3298406",
+    "nickel-amber": "9426470",
+    "delta-cobalt": "4097669",
+    "quartz-tundra": "2264446"
+   },
+   "answer": "xenon-cobalt: 3298406\nnickel-amber: 9426470\ndelta-cobalt: 4097669\nquartz-tundra: 2264446",
+   "err": null,
+   "sec": 238.3
+  },
+  {
+   "task": "vt",
+   "len": 200000,
+   "trial": 1,
+   "prompt_tokens": 200584,
+   "score": 0.7142857142857143,
+   "depth": [
+    0.058,
+    0.887
+   ],
+   "gold": [
+    "FAL3",
+    "ONY9",
+    "WIL8",
+    "XEN6",
+    "XEN8"
+   ],
+   "answer": "FAL3 ONY9 WIL8 EMB4 TUN6 XEN8 XEN6",
+   "err": null,
+   "sec": 234.9
+  },
+  {
+   "task": "mk",
+   "len": 200000,
+   "trial": 2,
+   "prompt_tokens": 200730,
+   "score": 1.0,
+   "depth": [
+    0.564,
+    0.129,
+    0.036,
+    0.215
+   ],
+   "gold": {
+    "saffron-ember": "8764416",
+    "tundra-xenon": "5606076",
+    "meadow-saffron": "8112745",
+    "kestrel-willow": "9607327"
+   },
+   "answer": "saffron-ember: 8764416\ntundra-xenon: 5606076\nmeadow-saffron: 8112745\nkestrel-willow: 9607327",
+   "err": null,
+   "sec": 240.7
+  },
+  {
+   "task": "vt",
+   "len": 200000,
+   "trial": 2,
+   "prompt_tokens": 199493,
+   "score": 0.5555555555555556,
+   "depth": [
+    0.01,
+    0.999
+   ],
+   "gold": [
+    "DEL2",
+    "KES5",
+    "TUN5",
+    "WIL9",
+    "XEN0"
+   ],
+   "answer": "WIL9 TUN5 ZEP6 HAR8 XEN0 DEL2 KES5 EMB0 EMB5",
+   "err": null,
+   "sec": 240.1
+  },
+  {
+   "task": "mk",
+   "len": 200000,
+   "trial": 3,
+   "prompt_tokens": 197979,
+   "score": 1.0,
+   "depth": [
+    0.035,
+    0.65,
+    0.589,
+    0.144
+   ],
+   "gold": {
+    "lumen-amber": "1556153",
+    "ember-falcon": "1009294",
+    "tundra-violet": "9745699",
+    "harbor-cobalt": "9949521"
+   },
+   "answer": "lumen-amber: 1556153\nember-falcon: 1009294\ntundra-violet: 9745699\nharbor-cobalt: 9949521",
+   "err": null,
+   "sec": 235.1
+  },
+  {
+   "task": "vt",
+   "len": 200000,
+   "trial": 3,
+   "prompt_tokens": 197468,
+   "score": 0.2,
+   "depth": [
+    0.146,
+    0.937
+   ],
+   "gold": [
+    "EMB6",
+    "SAF2",
+    "YAR8",
+    "ZEP2",
+    "ZEP9"
+   ],
+   "answer": "EMB6",
+   "err": null,
+   "sec": 228.1
+  },
+  {
+   "task": "mk",
+   "len": 200000,
+   "trial": 4,
+   "prompt_tokens": 196791,
+   "score": 1.0,
+   "depth": [
+    0.448,
+    0.402,
+    0.455,
+    0.146
+   ],
+   "gold": {
+    "lumen-raven": "5267314",
+    "zephyr-saffron": "8158342",
+    "ember-cobalt": "6777221",
+    "lumen-xenon": "8924837"
+   },
+   "answer": "lumen-raven: 5267314\nzephyr-saffron: 8158342\nember-cobalt: 6777221\nlumen-xenon: 8924837",
+   "err": null,
+   "sec": 232.7
+  },
+  {
+   "task": "vt",
+   "len": 200000,
+   "trial": 4,
+   "prompt_tokens": 197913,
+   "score": 0.6,
+   "depth": [
+    0.02,
+    0.943
+   ],
+   "gold": [
+    "EMB0",
+    "GAR9",
+    "KES3",
+    "RAV5",
+    "ZEP3"
+   ],
+   "answer": "VAR KES3 VAR RAV5 VAR ZEP3",
+   "err": null,
+   "sec": 230.9
+  }
+ ]
+}
