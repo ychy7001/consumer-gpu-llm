@@ -4,7 +4,7 @@
 
 | 硬件 | 部署 | 文档 |
 | --- | --- | --- |
-| 4× RTX 4090 48G（PCIe） | 4 个 HyperQwen 单卡实例（DP4）+ Router | [docs/rtx4090/](docs/rtx4090/) |
+| 4× RTX 4090 48G（PCIe） | 4 个 HyperQwen 单卡实例（DP4，single + MTP）+ Router | [docs/rtx4090/decision.md](docs/rtx4090/decision.md) |
 | 1× RTX 3090 24G | HyperQwen，W4A16 + INT8 激活，150k 上下文 | [docs/rtx3090/tuning.md](docs/rtx3090/tuning.md) |
 
 下文「环境」到「复现」都是 RTX 4090 这套。
@@ -19,7 +19,7 @@
 | --- | --- |
 | GPU | 4× RTX 4090 48G，PCIe 互联 |
 | 模型 | Qwen3.8-27B-FP8，`max-model-len 262144`，`kv-cache-dtype fp8` |
-| 推理 | HyperQwen（`ghcr.io/syv-ai/hyperqwen`，基于 vLLM 0.32；3 卡 batch 模式，1 卡 single + MTP 灰度）；此前为 vLLM 0.25.1 FP8 |
+| 推理 | HyperQwen（`ghcr.io/syv-ai/hyperqwen`，基于 vLLM 0.32），single + MTP + PTH，32 槽，CUDA graph 128；此前为 vLLM 0.25.1 FP8 |
 | 拓扑 | 每卡一个 HyperQwen 实例（W4A16 + INT8 激活，2026-11-01 起 DP4）+ [vllm-router](https://github.com/vllm-project/router) 0.1.15，`power_of_two` |
 | 同卡混部 | Qwen3-Embedding-0.6B、Qwen3-Reranker-0.6B |
 
@@ -34,10 +34,20 @@
 | 单卡 TP1 调参、vLLM 0.31、HyperQwen 量化、视觉与 MTP、生产替换 | 已验证（2026-10-31） | [docs/rtx4090/tp1-hyperqwen.md](docs/rtx4090/tp1-hyperqwen.md) |
 | 单卡 profile：single / batch 模式按场景选择（4090 与 3090 同一套测试） | 已验证（2026-10-31） | [docs/profiles.md](docs/profiles.md) |
 | DP4（4 个单卡副本）四卡实测、路由策略、长上下文质量 | 已验证（2026-11-01） | [docs/rtx4090/dp4.md](docs/rtx4090/dp4.md) |
+| 最终部署：公开测试集、single 全切、槽位、容量、长文档、功耗、故障切换 | 已验证（2026-11-01） | [docs/rtx4090/final.md](docs/rtx4090/final.md) |
+| 决策手册与复现清单 | 2026-11-01 | [docs/rtx4090/decision.md](docs/rtx4090/decision.md) |
 | prefill 调度：max-num-batched-tokens 四档；与 RTX 3090 对比 | 已验证（2026-10-30） | [docs/rtx4090/prefill.md](docs/rtx4090/prefill.md) |
-| PP 对照、HyperQwen 等其他引擎 | **未验证** | [docs/rtx4090/roadmap.md](docs/rtx4090/roadmap.md) |
+| TP4、PP2、负载感知路由 | 关闭或未做，理由见 roadmap | [docs/rtx4090/roadmap.md](docs/rtx4090/roadmap.md) |
 
-## 代表性结果（定稿 vs 原部署）
+## 代表性结果
+
+11-01 最终部署（四卡 single + MTP，经 Router，in1k/out256）：
+
+- 合计吞吐 c64 约 11,700 tok/s、c128 约 13,700–14,100 tok/s；对比 10 月 2×TP2 FP8 约 4,700 tok/s（批处理负载）。
+- 单路 decode 约 120 tok/s（原 58）；单卡 32 路纯 decode 合计 1,338 tok/s。
+- GSM8K / MMLU-Pro / C-Eval / IFEval / DocVQA / LongBench v2 与原 FP8 权重的差距在配对检验噪声内。
+
+9 月基线调优（定稿 vs 原部署）：
 
 - 峰值输出吞吐（并发 64，in1k/out256）：284 → 681 tok/s（2.4×）。主因是原 `max-num-seqs 6` 远低于 KV 容量。
 - 真实文本单流 TPOT P50：30.6 → 17.4 ms（MTP2，接受长度约 2.17）。

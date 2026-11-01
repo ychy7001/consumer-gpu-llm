@@ -1,5 +1,7 @@
 # DP4：四个单卡副本 + Router（2026-11-01）
 
+> 本文的部署是 11-01 白天的中间状态（3 batch + 1 single）。最终部署见 [final.md](final.md)。
+
 10-31 先把 GPU2、3 换成 HyperQwen 单卡实例（[tp1-hyperqwen.md](tp1-hyperqwen.md)），11-01 凌晨把剩下的 vLLM FP8 TP2（GPU0,1）也拆成两个单卡实例，四张卡全部单卡 DP，Router 挂 4 个 worker。本文是整机实测：Router 级吞吐、路由策略、长上下文质量。
 
 ## 部署
@@ -47,7 +49,7 @@ batch 实例参数：`KV=fp8 INT8_ACT=int8 MAX_LEN=262144 PREFIX_CACHE=1 VISION=
 
 结论：W4A16 权重、INT8 激活、int8 / fp8 KV 和 MTP 在 200k 以内没有可测到的检索损失。
 
-## 未解决
+## 后续
 
-- 扩大 CUDA graph 捕获尺寸后 GSM8K 低于 95% 的现象，复跑 3 次后判为噪声（[profiles.md](../profiles.md)）。GPU3 是否改 CG64（16 路 decode 每路 30→72 tok/s）待灰度有真实流量后再定。
-- GPU3 灰度（single + MTP + PTH）尚无真实业务流量对比。
+- 扩大 CUDA graph 捕获尺寸后 GSM8K 低于 95% 的现象，复跑 3 次后判为噪声（[profiles.md](../profiles.md)）。
+- 同日晚上四卡全部切到 single + MTP + PTH（32 槽，CG128），公开测试集、容量与切换记录见 [final.md](final.md)。

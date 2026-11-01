@@ -1,0 +1,233 @@
+{
+    "schema_version": 2,
+    "name": "Qwen3.8-27B-FP8@docvqa",
+    "dataset_name": "docvqa",
+    "dataset_pretty_name": "DocVQA",
+    "dataset_description": "\n## Overview\n\nDocVQA (Document Visual Question Answering) is a benchmark designed to evaluate AI systems' ability to answer questions based on document images such as scanned pages, forms, invoices, and reports. It requires understanding complex document layouts, structure, and visual elements beyond simple text extraction.\n\n## Task Description\n\n- **Task Type**: Document Visual Question Answering\n- **Input**: Document image + natural language question\n- **Output**: Single word or phrase answer extracted from document\n- **Domains**: Document understanding, OCR, layout comprehension\n\n## Key Features\n\n- Covers diverse document types (forms, invoices, letters, reports)\n- Requires understanding document layout and structure\n- Tests both text extraction and contextual reasoning\n- Questions require locating and interpreting specific information\n- Combines OCR capabilities with visual understanding\n\n## Evaluation Notes\n\n- Default evaluation uses the **validation** split\n- Primary metric: **ANLS** (Average Normalized Levenshtein Similarity)\n- Answers should be in format \"ANSWER: [ANSWER]\"\n- ANLS metric accounts for minor OCR/spelling variations\n- Multiple valid answers may be accepted for each question\n",
+    "model_name": "Qwen3.8-27B-FP8",
+    "metrics": [
+        {
+            "identity": {
+                "name": "anls",
+                "aggregation": "mean",
+                "dimensions": {}
+            },
+            "legacy_name": null,
+            "num": 500,
+            "score": 0.9496,
+            "macro_score": 0.9496,
+            "categories": [
+                {
+                    "name": [
+                        "default"
+                    ],
+                    "num": 500,
+                    "score": 0.9496,
+                    "macro_score": 0.9496,
+                    "subsets": [
+                        {
+                            "name": "DocVQA",
+                            "score": 0.9496,
+                            "num": 500,
+                            "metadata": null,
+                            "is_aggregate": false
+                        }
+                    ]
+                }
+            ],
+            "semantics": {
+                "semantic_id": "quality.similarity.ratio",
+                "metric_name": "Similarity",
+                "display_name": null,
+                "kind": "quality",
+                "direction": "higher_is_better",
+                "raw_unit": null,
+                "value_range": {
+                    "min": 0.0,
+                    "max": 1.0
+                },
+                "display_kind": "percent",
+                "display_multiplier": 100.0,
+                "display_unit": "%",
+                "display_precision": 1
+            }
+        }
+    ],
+    "analysis": "N/A",
+    "perf_metrics": {
+        "summary": {
+            "n_samples": 500,
+            "latency": {
+                "mean": 15.184518,
+                "std": 10.422944,
+                "min": 0.961662,
+                "25%": 11.206736,
+                "50%": 14.161331,
+                "75%": 16.787329,
+                "90%": 20.162583,
+                "99%": 46.319159,
+                "max": 163.583282
+            },
+            "throughput": {
+                "avg_output_tps": 4.09,
+                "avg_req_ps": 0.0659
+            },
+            "usage": {
+                "input_tokens": {
+                    "mean": 3812.578,
+                    "std": 1056.722928,
+                    "min": 921.0,
+                    "25%": 3729.0,
+                    "50%": 3840.0,
+                    "75%": 3985.5,
+                    "90%": 4058.1,
+                    "99%": 8133.0,
+                    "max": 8137.0
+                },
+                "output_tokens": {
+                    "mean": 62.086,
+                    "std": 114.395311,
+                    "min": 5.0,
+                    "25%": 30.0,
+                    "50%": 47.0,
+                    "75%": 64.0,
+                    "90%": 88.1,
+                    "99%": 500.06,
+                    "max": 2048.0
+                },
+                "total_tokens": {
+                    "mean": 3874.664,
+                    "std": 1067.857779,
+                    "min": 951.0,
+                    "25%": 3752.25,
+                    "50%": 3887.0,
+                    "75%": 4058.0,
+                    "90%": 4150.1,
+                    "99%": 8185.32,
+                    "max": 8272.0
+                },
+                "total_input_tokens": 1906289,
+                "total_output_tokens": 31043,
+                "total_tokens_count": 1937332
+            }
+        },
+        "coverage": {
+            "requests_with_metrics": 500,
+            "total_requests": 500
+        },
+        "metric_semantics": {
+            "n_samples": {
+                "semantic_id": "diagnostic.count.items",
+                "metric_name": "Samples",
+                "display_name": null,
+                "kind": "diagnostic",
+                "direction": "none",
+                "raw_unit": null,
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": null,
+                "display_precision": 0
+            },
+            "latency": {
+                "semantic_id": "perf.latency.seconds",
+                "metric_name": "Latency",
+                "display_name": null,
+                "kind": "quality",
+                "direction": "lower_is_better",
+                "raw_unit": "s",
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": "s",
+                "display_precision": 3
+            },
+            "throughput.avg_output_tps": {
+                "semantic_id": "perf.throughput.tokens_per_second",
+                "metric_name": "Output Throughput",
+                "display_name": null,
+                "kind": "quality",
+                "direction": "higher_is_better",
+                "raw_unit": "tok/s",
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": "tok/s",
+                "display_precision": 2
+            },
+            "throughput.avg_req_ps": {
+                "semantic_id": "perf.throughput.requests_per_second",
+                "metric_name": "Request Throughput",
+                "display_name": null,
+                "kind": "quality",
+                "direction": "higher_is_better",
+                "raw_unit": "req/s",
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": "req/s",
+                "display_precision": 2
+            },
+            "usage.input_tokens": {
+                "semantic_id": "diagnostic.count.items",
+                "metric_name": "Input Tokens",
+                "display_name": null,
+                "kind": "diagnostic",
+                "direction": "none",
+                "raw_unit": null,
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": null,
+                "display_precision": 0
+            },
+            "usage.output_tokens": {
+                "semantic_id": "diagnostic.count.items",
+                "metric_name": "Output Tokens",
+                "display_name": null,
+                "kind": "diagnostic",
+                "direction": "none",
+                "raw_unit": null,
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": null,
+                "display_precision": 0
+            },
+            "usage.total_tokens": {
+                "semantic_id": "diagnostic.count.items",
+                "metric_name": "Total Tokens",
+                "display_name": null,
+                "kind": "diagnostic",
+                "direction": "none",
+                "raw_unit": null,
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": null,
+                "display_precision": 0
+            }
+        }
+    },
+    "primary_metric_identity": {
+        "name": "anls",
+        "aggregation": "mean",
+        "dimensions": {}
+    },
+    "primary_metric_unavailable_reason": null,
+    "judge_summary": null,
+    "execution_summary": {
+        "requested": 500,
+        "succeeded": 500,
+        "errored": 0,
+        "incomplete": false,
+        "subsets": {
+            "DocVQA": {
+                "requested": 500,
+                "succeeded": 500,
+                "errored": 0
+            }
+        }
+    },
+    "num": 500
+}

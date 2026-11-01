@@ -70,6 +70,7 @@
 - 批处理客户端换成同镜像后基线为 3354，按此算 MTP + PTH 的 c24 输出吞吐 +7.8%。
 - CUDA graph 捕获上限加大（MTP 32→64、DFlash2 64→128）时 GSM8K 单次掉到 95% 以下，11-01 每配置复跑 3 次后判为噪声：MTP CG32 三跑 189 / 195 / 195，CG64 三跑 192 / 191 / 190，同一配置跑间就有 6–7 题翻转，交叉对比净差 -3 到 +5 题、没有固定方向；DFlash2 CG64 均值 191、CG128 均值 189.3，同样不显著。GSM200 单跑的 95% 门槛本身有约 ±3 题的抖动，判质量要看多跑均值（[results](../results/rtx4090/20261101-cg-quality/)）。
 - 所以 MTP CG=64 可以作为高并发候选：16 路每路 decode 72 对 30 tok/s，批处理 c24 +16%，代价是均值约少 2 题。
+- 11-01 最终选 **MTP + PTH，32 槽，CG=128**：CG 要覆盖 槽位 × (草稿数 + 1)，32 × 4 = 128。公开测试集上与 batch、FP8 无显著差距，四卡全切后整机吞吐见 [rtx4090/final.md](rtx4090/final.md)。
 - DFlash2 的 `MAX_LEN` 要比 drafter 容量少 8（取 262136），否则启动失败。
 - MTP 草稿数 2/4、关闭异步调度、MAX_LEN 降到 150k 都没有收益。
 
@@ -86,11 +87,11 @@
 
 ```bash
 -e SPEC=mtp -e CTX=long -e PTH_FA=1 -e INT8_ACT=int8 -e PREFILL_ATTN=int8 -e MTP_DRAFT_VOCAB=0 \
--e MAX_LEN=262144 -e GPU_UTIL=0.92 -e KV_MEM= -e MAX_SEQS=16 -e CG=32 \
+-e MAX_LEN=262144 -e GPU_UTIL=0.92 -e KV_MEM= -e MAX_SEQS=32 -e CG=128 \
 -e VISION=1 -e PREFIX_CACHE=1 -e EXTRA_ARGS="$VIS_ARGS" ... single
 ```
 
-4090，batch（线上配置）：
+4090，batch（10-31 至 11-01 的线上配置，已被上面的 single 替代）：
 
 ```bash
 -e KV=fp8 -e INT8_ACT=int8 -e MAX_LEN=262144 -e GPU_UTIL=0.92 \

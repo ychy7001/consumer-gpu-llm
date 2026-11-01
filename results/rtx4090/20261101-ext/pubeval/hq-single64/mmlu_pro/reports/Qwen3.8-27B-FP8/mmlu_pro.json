@@ -1,0 +1,389 @@
+{
+    "schema_version": 2,
+    "name": "Qwen3.8-27B-FP8@mmlu_pro",
+    "dataset_name": "mmlu_pro",
+    "dataset_pretty_name": "MMLU-Pro",
+    "dataset_description": "\n## Overview\n\nMMLU-Pro is an enhanced version of MMLU with increased difficulty and reasoning requirements. It features 10 answer choices instead of 4 and includes more challenging questions requiring deeper reasoning across 14 diverse domains.\n\n## Task Description\n\n- **Task Type**: Multiple-Choice Question Answering (10 options)\n- **Input**: Question with up to 10 answer choices\n- **Output**: Single correct answer letter (A-J)\n- **Domains**: 14 subjects including science, law, engineering, psychology\n\n## Key Features\n\n- 10 answer choices per question (vs 4 in original MMLU)\n- More challenging questions requiring reasoning\n- Includes Chain-of-Thought (CoT) explanations\n- 14 diverse subjects covered\n- Reduced impact of random guessing (10% vs 25%)\n\n## Evaluation Notes\n\n- Default configuration uses **5-shot** examples\n- Answers should follow \"ANSWER: [LETTER]\" format\n- Uses subject-specific few-shot examples\n- Step-by-step reasoning encouraged\n- Evaluates on test split with validation for few-shot\n",
+    "model_name": "Qwen3.8-27B-FP8",
+    "metrics": [
+        {
+            "identity": {
+                "name": "accuracy",
+                "aggregation": "mean",
+                "dimensions": {}
+            },
+            "legacy_name": null,
+            "num": 1400,
+            "score": 0.7343,
+            "macro_score": 0.7343,
+            "categories": [
+                {
+                    "name": [
+                        "default"
+                    ],
+                    "num": 1400,
+                    "score": 0.7343,
+                    "macro_score": 0.7343,
+                    "subsets": [
+                        {
+                            "name": "computer science",
+                            "score": 0.79,
+                            "num": 100,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "math",
+                            "score": 0.86,
+                            "num": 100,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "chemistry",
+                            "score": 0.72,
+                            "num": 100,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "engineering",
+                            "score": 0.49,
+                            "num": 100,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "law",
+                            "score": 0.61,
+                            "num": 100,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "biology",
+                            "score": 0.85,
+                            "num": 100,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "health",
+                            "score": 0.69,
+                            "num": 100,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "physics",
+                            "score": 0.78,
+                            "num": 100,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "business",
+                            "score": 0.8,
+                            "num": 100,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "philosophy",
+                            "score": 0.68,
+                            "num": 100,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "economics",
+                            "score": 0.86,
+                            "num": 100,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "other",
+                            "score": 0.66,
+                            "num": 100,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "psychology",
+                            "score": 0.77,
+                            "num": 100,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "history",
+                            "score": 0.72,
+                            "num": 100,
+                            "metadata": null,
+                            "is_aggregate": false
+                        }
+                    ]
+                }
+            ],
+            "semantics": {
+                "semantic_id": "quality.accuracy.ratio",
+                "metric_name": "Accuracy",
+                "display_name": null,
+                "kind": "quality",
+                "direction": "higher_is_better",
+                "raw_unit": null,
+                "value_range": {
+                    "min": 0.0,
+                    "max": 1.0
+                },
+                "display_kind": "percent",
+                "display_multiplier": 100.0,
+                "display_unit": "%",
+                "display_precision": 1
+            }
+        }
+    ],
+    "analysis": "N/A",
+    "perf_metrics": {
+        "summary": {
+            "n_samples": 1400,
+            "latency": {
+                "mean": 13.693559,
+                "std": 7.503784,
+                "min": 1.513368,
+                "25%": 8.065313,
+                "50%": 11.064752,
+                "75%": 17.379126,
+                "90%": 26.257112,
+                "99%": 32.425248,
+                "max": 37.820468
+            },
+            "throughput": {
+                "avg_output_tps": 70.3,
+                "avg_req_ps": 0.073
+            },
+            "usage": {
+                "input_tokens": {
+                    "mean": 1425.457857,
+                    "std": 353.424571,
+                    "min": 922.0,
+                    "25%": 1133.75,
+                    "50%": 1327.5,
+                    "75%": 1613.25,
+                    "90%": 1885.2,
+                    "99%": 2457.08,
+                    "max": 2605.0
+                },
+                "output_tokens": {
+                    "mean": 962.705,
+                    "std": 560.686572,
+                    "min": 89.0,
+                    "25%": 549.0,
+                    "50%": 739.5,
+                    "75%": 1233.25,
+                    "90%": 2048.0,
+                    "99%": 2048.0,
+                    "max": 2048.0
+                },
+                "total_tokens": {
+                    "mean": 2388.162857,
+                    "std": 696.22097,
+                    "min": 1022.0,
+                    "25%": 1807.5,
+                    "50%": 2253.5,
+                    "75%": 2927.5,
+                    "90%": 3408.4,
+                    "99%": 3947.03,
+                    "max": 4516.0
+                },
+                "total_input_tokens": 1995641,
+                "total_output_tokens": 1347787,
+                "total_tokens_count": 3343428
+            }
+        },
+        "coverage": {
+            "requests_with_metrics": 1400,
+            "total_requests": 1400
+        },
+        "metric_semantics": {
+            "n_samples": {
+                "semantic_id": "diagnostic.count.items",
+                "metric_name": "Samples",
+                "display_name": null,
+                "kind": "diagnostic",
+                "direction": "none",
+                "raw_unit": null,
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": null,
+                "display_precision": 0
+            },
+            "latency": {
+                "semantic_id": "perf.latency.seconds",
+                "metric_name": "Latency",
+                "display_name": null,
+                "kind": "quality",
+                "direction": "lower_is_better",
+                "raw_unit": "s",
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": "s",
+                "display_precision": 3
+            },
+            "throughput.avg_output_tps": {
+                "semantic_id": "perf.throughput.tokens_per_second",
+                "metric_name": "Output Throughput",
+                "display_name": null,
+                "kind": "quality",
+                "direction": "higher_is_better",
+                "raw_unit": "tok/s",
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": "tok/s",
+                "display_precision": 2
+            },
+            "throughput.avg_req_ps": {
+                "semantic_id": "perf.throughput.requests_per_second",
+                "metric_name": "Request Throughput",
+                "display_name": null,
+                "kind": "quality",
+                "direction": "higher_is_better",
+                "raw_unit": "req/s",
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": "req/s",
+                "display_precision": 2
+            },
+            "usage.input_tokens": {
+                "semantic_id": "diagnostic.count.items",
+                "metric_name": "Input Tokens",
+                "display_name": null,
+                "kind": "diagnostic",
+                "direction": "none",
+                "raw_unit": null,
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": null,
+                "display_precision": 0
+            },
+            "usage.output_tokens": {
+                "semantic_id": "diagnostic.count.items",
+                "metric_name": "Output Tokens",
+                "display_name": null,
+                "kind": "diagnostic",
+                "direction": "none",
+                "raw_unit": null,
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": null,
+                "display_precision": 0
+            },
+            "usage.total_tokens": {
+                "semantic_id": "diagnostic.count.items",
+                "metric_name": "Total Tokens",
+                "display_name": null,
+                "kind": "diagnostic",
+                "direction": "none",
+                "raw_unit": null,
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": null,
+                "display_precision": 0
+            }
+        }
+    },
+    "primary_metric_identity": {
+        "name": "accuracy",
+        "aggregation": "mean",
+        "dimensions": {}
+    },
+    "primary_metric_unavailable_reason": null,
+    "judge_summary": null,
+    "execution_summary": {
+        "requested": 1400,
+        "succeeded": 1400,
+        "errored": 0,
+        "incomplete": false,
+        "subsets": {
+            "computer science": {
+                "requested": 100,
+                "succeeded": 100,
+                "errored": 0
+            },
+            "math": {
+                "requested": 100,
+                "succeeded": 100,
+                "errored": 0
+            },
+            "chemistry": {
+                "requested": 100,
+                "succeeded": 100,
+                "errored": 0
+            },
+            "engineering": {
+                "requested": 100,
+                "succeeded": 100,
+                "errored": 0
+            },
+            "law": {
+                "requested": 100,
+                "succeeded": 100,
+                "errored": 0
+            },
+            "biology": {
+                "requested": 100,
+                "succeeded": 100,
+                "errored": 0
+            },
+            "health": {
+                "requested": 100,
+                "succeeded": 100,
+                "errored": 0
+            },
+            "physics": {
+                "requested": 100,
+                "succeeded": 100,
+                "errored": 0
+            },
+            "business": {
+                "requested": 100,
+                "succeeded": 100,
+                "errored": 0
+            },
+            "philosophy": {
+                "requested": 100,
+                "succeeded": 100,
+                "errored": 0
+            },
+            "economics": {
+                "requested": 100,
+                "succeeded": 100,
+                "errored": 0
+            },
+            "other": {
+                "requested": 100,
+                "succeeded": 100,
+                "errored": 0
+            },
+            "psychology": {
+                "requested": 100,
+                "succeeded": 100,
+                "errored": 0
+            },
+            "history": {
+                "requested": 100,
+                "succeeded": 100,
+                "errored": 0
+            }
+        }
+    },
+    "num": 1400
+}

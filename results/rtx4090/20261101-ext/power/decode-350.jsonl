@@ -1,0 +1,1 @@
+{"concurrency": 1, "requests": 3, "ok": 3, "errors": [], "prompt_tokens_p50": 83, "completion_tokens_p50": 512, "ttft_p50_s": 0.15999628603458405, "decode_tok_s_p50": 113.3877023740348, "decode_tok_s_min": 107.7881179717792, "total_out_tok_s": 109.70883646973381, "wall_s": 14.000695380847901, "ctx_nominal": 0, "ts": "2026-11-01T08:59:02"}

@@ -1,0 +1,875 @@
+{
+    "schema_version": 2,
+    "name": "Qwen3.8-27B-FP8@ceval",
+    "dataset_name": "ceval",
+    "dataset_pretty_name": "C-Eval",
+    "dataset_description": "\n## Overview\n\nC-Eval is a comprehensive Chinese evaluation benchmark designed to assess the knowledge and reasoning abilities of language models in Chinese. It covers 52 subjects ranging from STEM to humanities and social sciences, with questions from middle school to professional examination levels.\n\n## Task Description\n\n- **Task Type**: Multiple-Choice Question Answering (Chinese)\n- **Input**: Chinese question with four answer choices (A, B, C, D)\n- **Output**: Single correct answer letter\n- **Subjects**: 52 subjects organized into 4 categories (STEM, Social Science, Humanities, Other)\n\n## Key Features\n\n- 13,948 multiple-choice questions across 52 subjects\n- Questions sourced from Chinese middle school, high school, college, and professional exams\n- Covers diverse domains including mathematics, physics, law, medicine, and more\n- Includes explanations for validation split questions\n- Standard benchmark for Chinese language model evaluation\n\n## Evaluation Notes\n\n- Default configuration uses **5-shot** examples from the dev split\n- Questions and prompts are in Chinese\n- Answers should follow the format: \"答案：[LETTER]\"\n- Results can be aggregated by subject or category\n- Use `subset_list` parameter to evaluate specific subjects\n",
+    "model_name": "Qwen3.8-27B-FP8",
+    "metrics": [
+        {
+            "identity": {
+                "name": "accuracy",
+                "aggregation": "mean",
+                "dimensions": {}
+            },
+            "legacy_name": null,
+            "num": 1346,
+            "score": 0.8715,
+            "macro_score": 0.875,
+            "categories": [
+                {
+                    "name": [
+                        "Humanities"
+                    ],
+                    "num": 257,
+                    "score": 0.8794,
+                    "macro_score": 0.8833,
+                    "subsets": [
+                        {
+                            "name": "modern_chinese_history",
+                            "score": 0.8261,
+                            "num": 23,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "ideological_and_moral_cultivation",
+                            "score": 1.0,
+                            "num": 19,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "logic",
+                            "score": 0.9091,
+                            "num": 22,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "law",
+                            "score": 0.8333,
+                            "num": 24,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "chinese_language_and_literature",
+                            "score": 0.7826,
+                            "num": 23,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "art_studies",
+                            "score": 0.8182,
+                            "num": 33,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "professional_tour_guide",
+                            "score": 0.9655,
+                            "num": 29,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "legal_professional",
+                            "score": 0.7826,
+                            "num": 23,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "high_school_chinese",
+                            "score": 0.8947,
+                            "num": 19,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "high_school_history",
+                            "score": 0.95,
+                            "num": 20,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "middle_school_history",
+                            "score": 0.9545,
+                            "num": 22,
+                            "metadata": null,
+                            "is_aggregate": false
+                        }
+                    ]
+                },
+                {
+                    "name": [
+                        "Other"
+                    ],
+                    "num": 384,
+                    "score": 0.8463,
+                    "macro_score": 0.8556,
+                    "subsets": [
+                        {
+                            "name": "civil_servant",
+                            "score": 0.8723,
+                            "num": 47,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "sports_science",
+                            "score": 0.9474,
+                            "num": 19,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "plant_protection",
+                            "score": 0.9545,
+                            "num": 22,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "basic_medicine",
+                            "score": 0.8947,
+                            "num": 19,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "clinical_medicine",
+                            "score": 0.8636,
+                            "num": 22,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "urban_and_rural_planner",
+                            "score": 0.7391,
+                            "num": 46,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "accountant",
+                            "score": 0.8776,
+                            "num": 49,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "fire_engineer",
+                            "score": 0.6774,
+                            "num": 31,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "environmental_impact_assessment_engineer",
+                            "score": 0.871,
+                            "num": 31,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "tax_accountant",
+                            "score": 0.8163,
+                            "num": 49,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "physician",
+                            "score": 0.898,
+                            "num": 49,
+                            "metadata": null,
+                            "is_aggregate": false
+                        }
+                    ]
+                },
+                {
+                    "name": [
+                        "STEM"
+                    ],
+                    "num": 430,
+                    "score": 0.8651,
+                    "macro_score": 0.8682,
+                    "subsets": [
+                        {
+                            "name": "computer_network",
+                            "score": 0.8421,
+                            "num": 19,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "operating_system",
+                            "score": 0.9474,
+                            "num": 19,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "computer_architecture",
+                            "score": 0.9524,
+                            "num": 21,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "college_programming",
+                            "score": 0.8649,
+                            "num": 37,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "college_physics",
+                            "score": 0.8947,
+                            "num": 19,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "college_chemistry",
+                            "score": 0.9167,
+                            "num": 24,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "advanced_mathematics",
+                            "score": 0.6842,
+                            "num": 19,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "probability_and_statistics",
+                            "score": 0.7222,
+                            "num": 18,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "discrete_mathematics",
+                            "score": 0.5625,
+                            "num": 16,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "electrical_engineer",
+                            "score": 0.6757,
+                            "num": 37,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "metrology_engineer",
+                            "score": 0.875,
+                            "num": 24,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "high_school_mathematics",
+                            "score": 0.7222,
+                            "num": 18,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "high_school_physics",
+                            "score": 1.0,
+                            "num": 19,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "high_school_chemistry",
+                            "score": 0.8421,
+                            "num": 19,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "high_school_biology",
+                            "score": 1.0,
+                            "num": 19,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "middle_school_mathematics",
+                            "score": 1.0,
+                            "num": 19,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "middle_school_biology",
+                            "score": 0.9048,
+                            "num": 21,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "middle_school_physics",
+                            "score": 1.0,
+                            "num": 19,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "middle_school_chemistry",
+                            "score": 1.0,
+                            "num": 20,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "veterinary_medicine",
+                            "score": 0.9565,
+                            "num": 23,
+                            "metadata": null,
+                            "is_aggregate": false
+                        }
+                    ]
+                },
+                {
+                    "name": [
+                        "Social Science"
+                    ],
+                    "num": 275,
+                    "score": 0.9091,
+                    "macro_score": 0.9183,
+                    "subsets": [
+                        {
+                            "name": "college_economics",
+                            "score": 0.8727,
+                            "num": 55,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "business_administration",
+                            "score": 0.8485,
+                            "num": 33,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "marxism",
+                            "score": 0.9474,
+                            "num": 19,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "mao_zedong_thought",
+                            "score": 0.875,
+                            "num": 24,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "education_science",
+                            "score": 0.8966,
+                            "num": 29,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "teacher_qualification",
+                            "score": 0.9318,
+                            "num": 44,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "high_school_politics",
+                            "score": 0.9474,
+                            "num": 19,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "high_school_geography",
+                            "score": 0.9474,
+                            "num": 19,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "middle_school_politics",
+                            "score": 1.0,
+                            "num": 21,
+                            "metadata": null,
+                            "is_aggregate": false
+                        },
+                        {
+                            "name": "middle_school_geography",
+                            "score": 0.9167,
+                            "num": 12,
+                            "metadata": null,
+                            "is_aggregate": false
+                        }
+                    ]
+                }
+            ],
+            "semantics": {
+                "semantic_id": "quality.accuracy.ratio",
+                "metric_name": "Accuracy",
+                "display_name": null,
+                "kind": "quality",
+                "direction": "higher_is_better",
+                "raw_unit": null,
+                "value_range": {
+                    "min": 0.0,
+                    "max": 1.0
+                },
+                "display_kind": "percent",
+                "display_multiplier": 100.0,
+                "display_unit": "%",
+                "display_precision": 1
+            }
+        }
+    ],
+    "analysis": "N/A",
+    "perf_metrics": {
+        "summary": {
+            "n_samples": 1346,
+            "latency": {
+                "mean": 29.101333,
+                "std": 26.459209,
+                "min": 2.934803,
+                "25%": 13.563034,
+                "50%": 19.049949,
+                "75%": 32.423205,
+                "90%": 65.651623,
+                "99%": 113.201831,
+                "max": 119.368855
+            },
+            "throughput": {
+                "avg_output_tps": 18.14,
+                "avg_req_ps": 0.0344
+            },
+            "usage": {
+                "input_tokens": {
+                    "mean": 1039.918276,
+                    "std": 458.536493,
+                    "min": 439.0,
+                    "25%": 760.0,
+                    "50%": 941.0,
+                    "75%": 1212.75,
+                    "90%": 1462.0,
+                    "99%": 3373.0,
+                    "max": 3588.0
+                },
+                "output_tokens": {
+                    "mean": 527.791233,
+                    "std": 492.667761,
+                    "min": 55.0,
+                    "25%": 236.25,
+                    "50%": 336.5,
+                    "75%": 584.25,
+                    "90%": 1209.0,
+                    "99%": 2048.0,
+                    "max": 2048.0
+                },
+                "total_tokens": {
+                    "mean": 1567.70951,
+                    "std": 806.585382,
+                    "min": 506.0,
+                    "25%": 1041.25,
+                    "50%": 1337.5,
+                    "75%": 1806.0,
+                    "90%": 2656.0,
+                    "99%": 4852.55,
+                    "max": 5636.0
+                },
+                "total_input_tokens": 1399730,
+                "total_output_tokens": 710407,
+                "total_tokens_count": 2110137
+            }
+        },
+        "coverage": {
+            "requests_with_metrics": 1346,
+            "total_requests": 1346
+        },
+        "metric_semantics": {
+            "n_samples": {
+                "semantic_id": "diagnostic.count.items",
+                "metric_name": "Samples",
+                "display_name": null,
+                "kind": "diagnostic",
+                "direction": "none",
+                "raw_unit": null,
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": null,
+                "display_precision": 0
+            },
+            "latency": {
+                "semantic_id": "perf.latency.seconds",
+                "metric_name": "Latency",
+                "display_name": null,
+                "kind": "quality",
+                "direction": "lower_is_better",
+                "raw_unit": "s",
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": "s",
+                "display_precision": 3
+            },
+            "throughput.avg_output_tps": {
+                "semantic_id": "perf.throughput.tokens_per_second",
+                "metric_name": "Output Throughput",
+                "display_name": null,
+                "kind": "quality",
+                "direction": "higher_is_better",
+                "raw_unit": "tok/s",
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": "tok/s",
+                "display_precision": 2
+            },
+            "throughput.avg_req_ps": {
+                "semantic_id": "perf.throughput.requests_per_second",
+                "metric_name": "Request Throughput",
+                "display_name": null,
+                "kind": "quality",
+                "direction": "higher_is_better",
+                "raw_unit": "req/s",
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": "req/s",
+                "display_precision": 2
+            },
+            "usage.input_tokens": {
+                "semantic_id": "diagnostic.count.items",
+                "metric_name": "Input Tokens",
+                "display_name": null,
+                "kind": "diagnostic",
+                "direction": "none",
+                "raw_unit": null,
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": null,
+                "display_precision": 0
+            },
+            "usage.output_tokens": {
+                "semantic_id": "diagnostic.count.items",
+                "metric_name": "Output Tokens",
+                "display_name": null,
+                "kind": "diagnostic",
+                "direction": "none",
+                "raw_unit": null,
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": null,
+                "display_precision": 0
+            },
+            "usage.total_tokens": {
+                "semantic_id": "diagnostic.count.items",
+                "metric_name": "Total Tokens",
+                "display_name": null,
+                "kind": "diagnostic",
+                "direction": "none",
+                "raw_unit": null,
+                "value_range": null,
+                "display_kind": "number",
+                "display_multiplier": null,
+                "display_unit": null,
+                "display_precision": 0
+            }
+        }
+    },
+    "primary_metric_identity": {
+        "name": "accuracy",
+        "aggregation": "mean",
+        "dimensions": {}
+    },
+    "primary_metric_unavailable_reason": null,
+    "judge_summary": null,
+    "execution_summary": {
+        "requested": 1346,
+        "succeeded": 1346,
+        "errored": 0,
+        "incomplete": false,
+        "subsets": {
+            "computer_network": {
+                "requested": 19,
+                "succeeded": 19,
+                "errored": 0
+            },
+            "operating_system": {
+                "requested": 19,
+                "succeeded": 19,
+                "errored": 0
+            },
+            "computer_architecture": {
+                "requested": 21,
+                "succeeded": 21,
+                "errored": 0
+            },
+            "college_programming": {
+                "requested": 37,
+                "succeeded": 37,
+                "errored": 0
+            },
+            "college_physics": {
+                "requested": 19,
+                "succeeded": 19,
+                "errored": 0
+            },
+            "college_chemistry": {
+                "requested": 24,
+                "succeeded": 24,
+                "errored": 0
+            },
+            "advanced_mathematics": {
+                "requested": 19,
+                "succeeded": 19,
+                "errored": 0
+            },
+            "probability_and_statistics": {
+                "requested": 18,
+                "succeeded": 18,
+                "errored": 0
+            },
+            "discrete_mathematics": {
+                "requested": 16,
+                "succeeded": 16,
+                "errored": 0
+            },
+            "electrical_engineer": {
+                "requested": 37,
+                "succeeded": 37,
+                "errored": 0
+            },
+            "metrology_engineer": {
+                "requested": 24,
+                "succeeded": 24,
+                "errored": 0
+            },
+            "high_school_mathematics": {
+                "requested": 18,
+                "succeeded": 18,
+                "errored": 0
+            },
+            "high_school_physics": {
+                "requested": 19,
+                "succeeded": 19,
+                "errored": 0
+            },
+            "high_school_chemistry": {
+                "requested": 19,
+                "succeeded": 19,
+                "errored": 0
+            },
+            "high_school_biology": {
+                "requested": 19,
+                "succeeded": 19,
+                "errored": 0
+            },
+            "middle_school_mathematics": {
+                "requested": 19,
+                "succeeded": 19,
+                "errored": 0
+            },
+            "middle_school_biology": {
+                "requested": 21,
+                "succeeded": 21,
+                "errored": 0
+            },
+            "middle_school_physics": {
+                "requested": 19,
+                "succeeded": 19,
+                "errored": 0
+            },
+            "middle_school_chemistry": {
+                "requested": 20,
+                "succeeded": 20,
+                "errored": 0
+            },
+            "veterinary_medicine": {
+                "requested": 23,
+                "succeeded": 23,
+                "errored": 0
+            },
+            "college_economics": {
+                "requested": 55,
+                "succeeded": 55,
+                "errored": 0
+            },
+            "business_administration": {
+                "requested": 33,
+                "succeeded": 33,
+                "errored": 0
+            },
+            "marxism": {
+                "requested": 19,
+                "succeeded": 19,
+                "errored": 0
+            },
+            "mao_zedong_thought": {
+                "requested": 24,
+                "succeeded": 24,
+                "errored": 0
+            },
+            "education_science": {
+                "requested": 29,
+                "succeeded": 29,
+                "errored": 0
+            },
+            "teacher_qualification": {
+                "requested": 44,
+                "succeeded": 44,
+                "errored": 0
+            },
+            "high_school_politics": {
+                "requested": 19,
+                "succeeded": 19,
+                "errored": 0
+            },
+            "high_school_geography": {
+                "requested": 19,
+                "succeeded": 19,
+                "errored": 0
+            },
+            "middle_school_politics": {
+                "requested": 21,
+                "succeeded": 21,
+                "errored": 0
+            },
+            "middle_school_geography": {
+                "requested": 12,
+                "succeeded": 12,
+                "errored": 0
+            },
+            "modern_chinese_history": {
+                "requested": 23,
+                "succeeded": 23,
+                "errored": 0
+            },
+            "ideological_and_moral_cultivation": {
+                "requested": 19,
+                "succeeded": 19,
+                "errored": 0
+            },
+            "logic": {
+                "requested": 22,
+                "succeeded": 22,
+                "errored": 0
+            },
+            "law": {
+                "requested": 24,
+                "succeeded": 24,
+                "errored": 0
+            },
+            "chinese_language_and_literature": {
+                "requested": 23,
+                "succeeded": 23,
+                "errored": 0
+            },
+            "art_studies": {
+                "requested": 33,
+                "succeeded": 33,
+                "errored": 0
+            },
+            "professional_tour_guide": {
+                "requested": 29,
+                "succeeded": 29,
+                "errored": 0
+            },
+            "legal_professional": {
+                "requested": 23,
+                "succeeded": 23,
+                "errored": 0
+            },
+            "high_school_chinese": {
+                "requested": 19,
+                "succeeded": 19,
+                "errored": 0
+            },
+            "high_school_history": {
+                "requested": 20,
+                "succeeded": 20,
+                "errored": 0
+            },
+            "middle_school_history": {
+                "requested": 22,
+                "succeeded": 22,
+                "errored": 0
+            },
+            "civil_servant": {
+                "requested": 47,
+                "succeeded": 47,
+                "errored": 0
+            },
+            "sports_science": {
+                "requested": 19,
+                "succeeded": 19,
+                "errored": 0
+            },
+            "plant_protection": {
+                "requested": 22,
+                "succeeded": 22,
+                "errored": 0
+            },
+            "basic_medicine": {
+                "requested": 19,
+                "succeeded": 19,
+                "errored": 0
+            },
+            "clinical_medicine": {
+                "requested": 22,
+                "succeeded": 22,
+                "errored": 0
+            },
+            "urban_and_rural_planner": {
+                "requested": 46,
+                "succeeded": 46,
+                "errored": 0
+            },
+            "accountant": {
+                "requested": 49,
+                "succeeded": 49,
+                "errored": 0
+            },
+            "fire_engineer": {
+                "requested": 31,
+                "succeeded": 31,
+                "errored": 0
+            },
+            "environmental_impact_assessment_engineer": {
+                "requested": 31,
+                "succeeded": 31,
+                "errored": 0
+            },
+            "tax_accountant": {
+                "requested": 49,
+                "succeeded": 49,
+                "errored": 0
+            },
+            "physician": {
+                "requested": 49,
+                "succeeded": 49,
+                "errored": 0
+            }
+        }
+    },
+    "num": 1346
+}

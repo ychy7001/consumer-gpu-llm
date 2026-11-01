@@ -1,0 +1,40 @@
+{
+ "summary": {
+  "wall_s": 32.4,
+  "ok": 2,
+  "n": 2,
+  "multi_ok": true,
+  "multi": {
+   "ok": true,
+   "s": 15.674075841903687,
+   "prompt_tokens": 13406,
+   "completion_tokens": 562
+  },
+  "cer_scan": 0.0056,
+  "ptok_scan": 8322,
+  "cer_photo": 0.0,
+  "ptok_photo": 8224,
+  "cer_all": 0.0028,
+  "ptok_all": 8273
+ },
+ "rows": [
+  {
+   "file": "00-scan.png",
+   "kind": "scan",
+   "ok": true,
+   "s": 32.42761468887329,
+   "prompt_tokens": 8322,
+   "completion_tokens": 1325,
+   "cer": 0.0056
+  },
+  {
+   "file": "16-photo.jpg",
+   "kind": "photo",
+   "ok": true,
+   "s": 23.519132614135742,
+   "prompt_tokens": 8224,
+   "completion_tokens": 851,
+   "cer": 0.0
+  }
+ ]
+}
