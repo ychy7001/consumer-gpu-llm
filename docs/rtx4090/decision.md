@@ -8,11 +8,11 @@
 
 | 指标（整机，经 Router） | 数值 | 出处 |
 | --- | --- | --- |
-| 对话 1k 入 / 256 出，合计 tok/s | c64 约 11,700，c128 约 13,700–14,100；TTFT P99 ≤ 5 s 时约 80–90 路并发 | [final.md](final.md) |
+| 对话 1k 入 / 256 出，合计 tok/s | c64 约 11,000，c128 约 13,200（11-02 三轮均值，单轮最高 11,800 / 14,100）；TTFT P99 ≤ 5 s 时约 85 路并发 | [final.md#11-02-三轮复测](final.md#11-02-三轮复测) |
 | 单路 decode | 约 120 tok/s | [final.md#槽位数与-cuda-graph](final.md#槽位数与-cuda-graph) |
 | 单卡纯 decode 峰值（c32） | 1,338 tok/s | 同上 |
 | 16k / 64k prefill，单请求 | 约 4,500 / 3,300 tok/s | [final.md#长-prefill-切块](final.md#长-prefill-切块) |
-| 128k / 200k 单请求 TTFT | 60 s / 116 s | [final.md#长文档](final.md#长文档) |
+| 128k / 200k 单请求 TTFT | 约 58–60 s / 116–119 s | [final.md#长文档](final.md#长文档)、[final.md#11-02-三轮复测](final.md#11-02-三轮复测) |
 | 公开测试集与原 FP8 的差距 | 配对检验不显著；DocVQA 约 -0.7 ANLS | [final.md#公开测试集](final.md#公开测试集) |
 | 对比原部署（2×TP2 FP8） | DP4 batch 已是 2.2–2.8 倍（批处理负载），全 single 再 +18–52%；单路 decode 58 → 120 | [dp4.md](dp4.md)、[final.md](final.md) |
 
@@ -31,7 +31,7 @@
 | 长文档与对话混跑 | 对话 P99 会放大 3–5 倍。若必须混跑，试 `--max-num-batched-tokens 8192 --long-prefill-token-threshold 2048` | [final.md#长-prefill-切块](final.md#长-prefill-切块) |
 | 功耗受限 | 300 W：功耗 -23%，decode -13%，prefill -9%。不要低于 300 W | [final.md#功耗](final.md#功耗) |
 | 同卡放 embedding / reranker | 可以。满载时延迟 P99 约 100–116 ms；那张卡 `GPU_UTIL` 降到 0.80–0.82 | [final.md#混合负载与同卡混部](final.md#混合负载与同卡混部) |
-| Router 健康检查参数 | 默认即可。快速参数只把意外崩溃后的接流从 117 s 缩到 11 s，失败数不变 | [final.md#故障切换](final.md#故障切换) |
+| Router 健康检查参数 | 默认即可。快速参数只把意外崩溃后的接流从 117 s 缩到 11 s，失败数不变；c32 时约 6 个已开始输出的流式请求会中断，重试接不回 | [final.md#故障切换](final.md#故障切换) |
 | SGLang | 这台机器不用。并发 24 时 TPOT 比 vLLM 慢 66% | [engine-tp.md](engine-tp.md) |
 
 ## 不要做的事
@@ -45,8 +45,9 @@
 ## 未覆盖
 
 - **TP4、PP2：** 不再做。PCIe 卡上 TP2 已经输给单卡，TP4 的同步开销只会更大；PP 的气泡在单请求场景无收益，长文档 TTFT 的瓶颈在单卡算力，应该靠 context parallel 或更快的 prefill kernel 解决。
-- **真实业务流量对比：** 截至 11-01 没有业务流量，切换后的表现等内测反馈。
+- **真实业务流量对比：** 截至 11-02 没有业务流量，切换后的表现等内测反馈。
 - **负载感知路由：** 后端 `/get_load` 返回 404，`power_of_two` 实际不看负载。长文档多时会叠到同一张卡，需要 Router 或后端补负载上报。
+- **生产 Router 的重试语义：** 故障演练用的是单独起的 Router，生产实例的重试参数未单独验证。
 
 ## 复现清单
 

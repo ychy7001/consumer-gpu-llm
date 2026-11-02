@@ -1,0 +1,86 @@
+[23:50:55] round 1 start
+[00:18:46] start emb512-c1 --dataset-name random --random-input-len 512 --random-output-len 1 --max-concurrency 1 --num-prompts 80
+[00:19:04] end emb512-c1
+[00:19:04] start emb512-c8 --dataset-name random --random-input-len 512 --random-output-len 1 --max-concurrency 8 --num-prompts 320
+[00:19:23] end emb512-c8
+[00:19:23] start emb512-c32 --dataset-name random --random-input-len 512 --random-output-len 1 --max-concurrency 32 --num-prompts 1280
+[00:19:48] end emb512-c32
+[00:19:48] start emb4k-c8 --dataset-name random --random-input-len 4096 --random-output-len 1 --max-concurrency 8 --num-prompts 200
+[00:20:19] end emb4k-c8
+[00:20:19] start rr512-c1 --dataset-name random-rerank --random-input-len 512 --max-concurrency 1 --num-prompts 40
+[00:20:36] end rr512-c1
+[00:20:36] start rr512-c8 --dataset-name random-rerank --random-input-len 512 --max-concurrency 8 --num-prompts 160
+[00:20:53] end rr512-c8
+[00:20:53] start rr512-c32 --dataset-name random-rerank --random-input-len 512 --max-concurrency 32 --num-prompts 640
+[00:21:11] end rr512-c32
+[00:21:11] round 1 done
+chat                   ok 96/96 tot    3989 out   1335 ttft p50/p99     212/    881 tpot p50/p99    10/   15
+ctx128k-c4             ok 8/8 tot    3857 out      8 ttft p50/p99   52455/ 225093 tpot p50/p99     9/  273
+ctx128k                ok 4/4 tot    3090 out      5 ttft p50/p99   58132/  62415 tpot p50/p99    11/  225
+ctx200k                ok 2/2 tot    1719 out      2 ttft p50/p99  119466/ 124630 tpot p50/p99    11/   12
+ctx64k                 ok 8/8 tot    6250 out     26 ttft p50/p99   22030/  42179 tpot p50/p99    10/   86
+emb4k-c8               ok 200/200 req/s   21.5 e2el p50/p99    367/   383
+emb512-c1              ok 80/80 req/s   43.3 e2el p50/p99     22/    32
+emb512-c32             ok 1280/1280 req/s  224.4 e2el p50/p99    137/   210
+emb512-c8              ok 320/320 req/s  164.0 e2el p50/p99     45/    80
+longout                ok 32/32 tot    2400 out   1596 ttft p50/p99     398/   1255 tpot p50/p99     7/   11
+prefix-c16             ok 96/96 tot   20246 out   1075 ttft p50/p99     401/   2590 tpot p50/p99    11/   19
+rag                    ok 64/64 tot    8987 out    999 ttft p50/p99    1305/   4249 tpot p50/p99    11/   23
+real-c1                ok 6/6 tot     144 out    117 ttft p50/p99     120/    143 tpot p50/p99     9/    9
+real-c16               ok 64/64 tot    1606 out   1437 ttft p50/p99     201/    333 tpot p50/p99    10/   12
+rr512-c1               ok 40/40 req/s   45.0 e2el p50/p99     21/    48
+rr512-c32              ok 640/640 req/s  351.9 e2el p50/p99     82/   221
+rr512-c8               ok 160/160 req/s  186.0 e2el p50/p99     42/    71
+summ                   ok 24/24 tot    7674 out    441 ttft p50/p99    4364/  10300 tpot p50/p99    10/   23
+sweep-c1               ok 16/16 tot     600 out    121 ttft p50/p99     233/    285 tpot p50/p99     7/   10
+sweep-c128             ok 512/512 tot   12711 out   2537 ttft p50/p99    1709/  13126 tpot p50/p99    34/   60
+sweep-c16              ok 64/64 tot    5821 out   1165 ttft p50/p99     314/   1247 tpot p50/p99    11/   16
+sweep-c32              ok 128/128 tot    8615 out   1729 ttft p50/p99     439/   2252 tpot p50/p99    13/   30
+sweep-c4               ok 16/16 tot    2042 out    411 ttft p50/p99     234/    468 tpot p50/p99     8/   11
+sweep-c64              ok 256/256 tot   11168 out   2233 ttft p50/p99     553/   4552 tpot p50/p99    22/   45
+sweep-c8               ok 32/32 tot    3552 out    706 ttft p50/p99     258/   1174 tpot p50/p99     9/   13
+sweep-c96              ok 384/384 tot   12600 out   2511 ttft p50/p99     737/   5345 tpot p50/p99    29/   61
+[00:21:11] round 2 start
+[00:34:35] round 2 done
+chat                   ok 96/96 tot    4140 out   1385 ttft p50/p99     202/    768 tpot p50/p99     9/   15
+longout                ok 32/32 tot    2811 out   1870 ttft p50/p99     431/   1222 tpot p50/p99     7/    9
+prefix-c16             ok 96/96 tot   19842 out   1053 ttft p50/p99     407/   2337 tpot p50/p99    11/   21
+rag                    ok 64/64 tot    8275 out    920 ttft p50/p99    1096/   6419 tpot p50/p99    12/   24
+real-c1                ok 6/6 tot     136 out    110 ttft p50/p99     121/    129 tpot p50/p99     9/   10
+real-c16               ok 64/64 tot    1698 out   1520 ttft p50/p99     199/    352 tpot p50/p99    10/   12
+summ                   ok 24/24 tot    7924 out    455 ttft p50/p99    4142/   9841 tpot p50/p99    10/   23
+sweep-c1               ok 16/16 tot     588 out    118 ttft p50/p99     228/    263 tpot p50/p99     7/   10
+sweep-c128             ok 512/512 tot   13260 out   2647 ttft p50/p99    1739/  10298 tpot p50/p99    35/   58
+sweep-c16              ok 64/64 tot    5716 out   1144 ttft p50/p99     272/   1347 tpot p50/p99    10/   18
+sweep-c32              ok 128/128 tot    9233 out   1853 ttft p50/p99     390/   2215 tpot p50/p99    13/   23
+sweep-c4               ok 16/16 tot    2148 out    433 ttft p50/p99     243/    346 tpot p50/p99     8/   10
+sweep-c64              ok 256/256 tot   10700 out   2140 ttft p50/p99     571/   3923 tpot p50/p99    21/   45
+sweep-c8               ok 32/32 tot    3694 out    735 ttft p50/p99     258/    808 tpot p50/p99     9/   13
+sweep-c96              ok 384/384 tot   12831 out   2557 ttft p50/p99     740/   5187 tpot p50/p99    30/   55
+[00:34:36] round 3 start
+[00:48:08] round 3 done
+chat                   ok 96/96 tot    4180 out   1399 ttft p50/p99     202/    657 tpot p50/p99     9/   15
+longout                ok 32/32 tot    2479 out   1649 ttft p50/p99     347/   1092 tpot p50/p99     7/   11
+prefix-c16             ok 96/96 tot   19125 out   1015 ttft p50/p99     459/   2663 tpot p50/p99    12/   23
+rag                    ok 64/64 tot    8451 out    939 ttft p50/p99    1289/   5658 tpot p50/p99    10/   25
+real-c1                ok 6/6 tot     139 out    113 ttft p50/p99     122/    133 tpot p50/p99     9/    9
+real-c16               ok 64/64 tot    1651 out   1478 ttft p50/p99     202/    336 tpot p50/p99    10/   13
+summ                   ok 24/24 tot    7111 out    409 ttft p50/p99    4386/   9712 tpot p50/p99     9/   23
+sweep-c1               ok 16/16 tot     615 out    124 ttft p50/p99     233/    285 tpot p50/p99     7/    9
+sweep-c128             ok 512/512 tot   13661 out   2727 ttft p50/p99    1624/   6913 tpot p50/p99    35/   62
+sweep-c16              ok 64/64 tot    6078 out   1216 ttft p50/p99     375/   1026 tpot p50/p99    10/   19
+sweep-c32              ok 128/128 tot    9116 out   1830 ttft p50/p99     398/   2258 tpot p50/p99    13/   25
+sweep-c4               ok 16/16 tot    2161 out    435 ttft p50/p99     250/    712 tpot p50/p99     8/    9
+sweep-c64              ok 256/256 tot   11256 out   2251 ttft p50/p99     514/   4126 tpot p50/p99    21/   41
+sweep-c8               ok 32/32 tot    3566 out    709 ttft p50/p99     298/    772 tpot p50/p99     9/   15
+sweep-c96              ok 384/384 tot   11667 out   2325 ttft p50/p99    1118/   5743 tpot p50/p99    28/   55
+[00:48:08] soak start; restarts: vllm-embedding=0 vllm-hq-g0=0 vllm-hq-g1=0 vllm-hq-g2=0 vllm-hq-g3=0 vllm-reranker=0 ; router errors: 1
+[00:48:08] start soak-emb --dataset-name random --random-input-len 512 --random-output-len 1 --request-rate 20 --num-prompts 60000
+[00:48:08] start soak-rr --dataset-name random-rerank --random-input-len 512 --request-rate 10 --num-prompts 30000
+[01:39:20] end soak-rr
+[01:42:14] end soak-emb
+[01:42:14] soak done; restarts: vllm-embedding=0 vllm-hq-g0=0 vllm-hq-g1=0 vllm-hq-g2=0 vllm-hq-g3=0 vllm-reranker=0 ; router errors: 1
+soak-emb               ok 60000/60000 req/s   20.0 e2el p50/p99     29/    62
+soak-llm               ok 3000/3000 tot    2442 out    383 ttft p50/p99     514/   1164 tpot p50/p99     8/   16
+soak-rr                ok 30000/30000 req/s   10.0 e2el p50/p99     24/    48
+[01:42:14] REPORT ALL DONE
